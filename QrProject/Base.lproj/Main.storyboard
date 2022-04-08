@@ -214,24 +214,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a09-pQ-mex">
-                                <rect key="frame" x="40" y="782" width="334" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="OOZ-zj-TU7"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Scan QR code"/>
-                                <connections>
-                                    <action selector="qrTapped:" destination="cYS-tF-eKT" eventType="touchUpInside" id="3Fj-F5-TEf"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="50x-bI-fz2">
+                                <rect key="frame" x="40" y="331" width="334" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a09-pQ-mex">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="OOZ-zj-TU7"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Scan QR code"/>
+                                        <connections>
+                                            <action selector="qrTapped:" destination="cYS-tF-eKT" eventType="touchUpInside" id="3Fj-F5-TEf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YVU-MZ-5tQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="YVU-MZ-5tQ" firstAttribute="trailing" secondItem="a09-pQ-mex" secondAttribute="trailing" constant="40" id="D0O-Xx-9rv"/>
-                            <constraint firstItem="a09-pQ-mex" firstAttribute="leading" secondItem="YVU-MZ-5tQ" secondAttribute="leading" constant="40" id="bQg-qs-fFn"/>
-                            <constraint firstItem="YVU-MZ-5tQ" firstAttribute="bottom" secondItem="a09-pQ-mex" secondAttribute="bottom" constant="40" id="mFH-LE-7rs"/>
+                            <constraint firstItem="YVU-MZ-5tQ" firstAttribute="trailing" secondItem="50x-bI-fz2" secondAttribute="trailing" constant="40" id="1m1-rd-qKD"/>
+                            <constraint firstItem="50x-bI-fz2" firstAttribute="leading" secondItem="YVU-MZ-5tQ" secondAttribute="leading" constant="40" id="wKk-cd-j5H"/>
                         </constraints>
                     </view>
                     <connections>

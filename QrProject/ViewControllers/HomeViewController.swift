@@ -6,24 +6,41 @@
 //
 
 import UIKit
+import AVFoundation
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var qrButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    var qrScan = AVCaptureVideoPreviewLayer()
+    
+    func setupQr(){
+        
+        /*let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
+        
+        do{
+            let input = try AVCaptureDeviceInput(device: captureDevice)
+            sessions.addInput(input)
+            
+        }*/
+        
     }
-    */
+    var uidLL = ""
+    func addBase(){
+        
+    }
+
+    @IBAction func qrTapped(_ sender: Any) {
+        
+    }
+    
 
 }

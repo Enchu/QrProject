@@ -39,20 +39,26 @@ class LoginViewController: UIViewController {
         let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
+        
         Auth.auth().signIn(withEmail: email, password: password){(result,error) in
             if error != nil{
                 self.errorLabel.text = error!.localizedDescription
                 self.errorLabel.alpha = 1
             }
             else{
+                let Res = result?.user.uid
+                self.uidLog = Res!
                 self.transitionToHome()
             }
         }
         
     }
     
+    var uidLog=""
+    
     func transitionToHome(){
         let homeViewControllers = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
+        homeViewControllers?.uidLL = self.uidLog
         view.window?.rootViewController = homeViewControllers
         view.window?.makeKeyAndVisible()
     }

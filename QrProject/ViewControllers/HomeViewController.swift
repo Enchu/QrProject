@@ -57,8 +57,6 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
     }
     
     
-    
-    
     var uidLL = ""
     
     func addBase(_ message:String){

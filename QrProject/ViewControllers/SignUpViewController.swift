@@ -50,12 +50,21 @@ class SignUpViewController: UIViewController {
             return "Please make sure your password is at least 8 characters"
         }
         
-        
-        
         return nil
     }
     
+        
+    
+    
     @IBAction func signUpTapped(_ sender: Any) {
+        
+        let dateString = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale(identifier: "ru_Ru")
+        let currentDateTime = dateFormatter.string(from: dateString)
+        
         
         let error = validateFields()
         if error != nil{
@@ -76,7 +85,7 @@ class SignUpViewController: UIViewController {
                 else{
                     let db = Firestore.firestore()
                     
-                    db.collection("users").addDocument(data: ["firstname":firstname,"lastname":lastname,"uid": result!.user.uid])
+                    db.collection("users").addDocument(data: ["firstname":firstname,"lastname":lastname,"uid": result!.user.uid,"datetime":currentDateTime])
                     {(error) in
                         if error != nil {
                             self.showError("Error saving user data")

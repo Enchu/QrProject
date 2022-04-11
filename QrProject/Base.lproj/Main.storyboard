@@ -135,16 +135,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3dF-uu-ThU">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="05k-bv-oYe">
                                 <rect key="frame" x="40" y="84" width="334" height="50"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uca-ss-gy3">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NWa-wB-FGj">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="F4i-RD-cb2"/>
+                                            <constraint firstAttribute="height" constant="50" id="fGN-Pt-vj6"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="searchTaped:" destination="6ay-v1-EJW" eventType="editingDidEnd" id="Zq7-bo-j2a"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -152,13 +155,13 @@
                         <viewLayoutGuide key="safeArea" id="2Ua-6h-3Un"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="3dF-uu-ThU" firstAttribute="leading" secondItem="2Ua-6h-3Un" secondAttribute="leading" constant="40" id="Rgx-z7-WFU"/>
-                            <constraint firstItem="3dF-uu-ThU" firstAttribute="top" secondItem="2Ua-6h-3Un" secondAttribute="top" constant="40" id="aRK-9X-OoU"/>
-                            <constraint firstItem="2Ua-6h-3Un" firstAttribute="trailing" secondItem="3dF-uu-ThU" secondAttribute="trailing" constant="40" id="rqT-Kv-Dsa"/>
+                            <constraint firstItem="2Ua-6h-3Un" firstAttribute="trailing" secondItem="05k-bv-oYe" secondAttribute="trailing" constant="40" id="QdF-dE-DTg"/>
+                            <constraint firstItem="05k-bv-oYe" firstAttribute="top" secondItem="2Ua-6h-3Un" secondAttribute="top" constant="40" id="gl2-xd-slA"/>
+                            <constraint firstItem="05k-bv-oYe" firstAttribute="leading" secondItem="2Ua-6h-3Un" secondAttribute="leading" constant="40" id="yqA-JE-bbO"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="searchTextField" destination="uca-ss-gy3" id="E11-Cb-X7S"/>
+                        <outlet property="searchTextField" destination="NWa-wB-FGj" id="fO1-WW-Syl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="12L-6E-1j8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -253,7 +256,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a09-pQ-mex">
-                                <rect key="frame" x="40" y="782" width="334" height="40"/>
+                                <rect key="frame" x="149.5" y="428" width="115.5" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="OOZ-zj-TU7"/>
                                 </constraints>
@@ -267,9 +270,8 @@
                         <viewLayoutGuide key="safeArea" id="YVU-MZ-5tQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="a09-pQ-mex" firstAttribute="leading" secondItem="YVU-MZ-5tQ" secondAttribute="leading" constant="40" id="Y0F-2K-kHk"/>
-                            <constraint firstItem="YVU-MZ-5tQ" firstAttribute="trailing" secondItem="a09-pQ-mex" secondAttribute="trailing" constant="40" id="Yr1-cl-qCY"/>
-                            <constraint firstItem="YVU-MZ-5tQ" firstAttribute="bottom" secondItem="a09-pQ-mex" secondAttribute="bottom" constant="40" id="eLF-O0-Ssi"/>
+                            <constraint firstItem="a09-pQ-mex" firstAttribute="centerX" secondItem="Ah4-xi-xQp" secondAttribute="centerX" id="DmI-w8-JOv"/>
+                            <constraint firstItem="a09-pQ-mex" firstAttribute="centerY" secondItem="Ah4-xi-xQp" secondAttribute="centerY" id="QV0-ex-AM5"/>
                         </constraints>
                     </view>
                     <connections>

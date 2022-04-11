@@ -23,7 +23,6 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         Utilities.styleFiledButton(qrButton)
-        // Do any additional setup after loading the view.
     }
     
     func setupVideo(){
@@ -70,12 +69,12 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         let currentDateTime = dateFormatter.string(from: dateString)
         
         
-        
         let db = Firestore.firestore()
         db.collection("qf").addDocument(data: ["dateTime":currentDateTime,"name":message,"uid":self.uidLL ])
                 {(error) in
                     if error != nil{
-                        self.alert("Данные не могут сохраниться")
+                        print((error?.localizedDescription)!)
+                        //self.alert("Данные не могут сохраниться")
                     }
                 }
             }
@@ -91,19 +90,19 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
     }
     
 
+    
     //Работа после обнаружения QRcod
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard metadataObjects.count > 0 else {return}
         if let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject{
             if object.type == AVMetadataObject.ObjectType.qr{
-                self.addBase(object.stringValue!)
                 let alert = UIAlertController(title: "QR Code", message: object.stringValue, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { (action) in
-                    //UIPasteboard.general.string = object.stringValue
-                    print(object.stringValue)
-                    
+                    print(object.stringValue!)
                 }))
                 present(alert, animated: true, completion: nil)
+                //Hf
+                return self.addBase(object.stringValue!)
             }
         }
     }

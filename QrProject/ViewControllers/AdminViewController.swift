@@ -6,16 +6,29 @@
 //
 
 import UIKit
+import SwiftUI
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 class AdminViewController: UIViewController {
 
-    @IBOutlet weak var searchTextField: UITextField!
     
+    @IBOutlet weak var searchTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         Utilities.styleTextField(searchTextField)
+  
     }
     
-
-
+    
+    @IBAction func searchTaped(_ sender: Any) {
+        
+        let db = Firestore.firestore()
+        
+        
+    }
+    
+    
+    
 }

@@ -14,16 +14,16 @@ import SwiftUI
 
 class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
 
-    @IBOutlet weak var qrButton: UIButton!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
     var video = AVCaptureVideoPreviewLayer()
     //1. Настроим сессию
     let session = AVCaptureSession()
+    
+    @IBOutlet weak var qrButton: UIButton!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+    }
     
     func setupVideo(){
         
@@ -51,6 +51,7 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
     }
     
     func startRunning(){
+        setupVideo()
         view.layer.addSublayer(video)
         session.startRunning()
     }
@@ -60,11 +61,19 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
     
     var uidLL = ""
     
-    func addBase(){
-        let currentDateTime = Date()
+    func addBase(_ message:String){
+        
+        let dateString = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale(identifier: "ru_Ru")
+        let currentDateTime = dateFormatter.string(from: dateString)
+        
+        
         
         let db = Firestore.firestore()
-        db.collection("qf").addDocument(data: ["dateTime":currentDateTime,"uid":self.uidLL ])
+        db.collection("qf").addDocument(data: ["dateTime":currentDateTime,"name":message,"uid":self.uidLL ])
                 {(error) in
                     if error != nil{
                         self.alert("Данные не могут сохраниться")
@@ -88,11 +97,12 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         guard metadataObjects.count > 0 else {return}
         if let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject{
             if object.type == AVMetadataObject.ObjectType.qr{
-               
+                self.addBase(object.stringValue!)
                 let alert = UIAlertController(title: "QR Code", message: object.stringValue, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { (action) in
                     //UIPasteboard.general.string = object.stringValue
                     print(object.stringValue)
+                    
                 }))
                 present(alert, animated: true, completion: nil)
             }

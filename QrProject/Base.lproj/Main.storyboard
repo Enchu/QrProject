@@ -17,12 +17,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Jns-Gy-bZ1">
-                                <rect key="frame" x="40" y="713.5" width="334" height="108.5"/>
+                                <rect key="frame" x="40" y="702" width="334" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZp-Eq-IqL">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="8dy-Pe-3K9"/>
+                                            <constraint firstAttribute="height" constant="50" id="xBC-Pv-RBg"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Sign Up"/>
@@ -31,7 +31,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wbf-5x-tuv">
-                                        <rect key="frame" x="0.0" y="70" width="334" height="38.5"/>
+                                        <rect key="frame" x="0.0" y="70" width="334" height="50"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Login"/>
                                         <connections>
@@ -40,7 +40,7 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="JZp-Eq-IqL" firstAttribute="height" secondItem="Wbf-5x-tuv" secondAttribute="height" multiplier="1.29032" id="LmI-Gb-5lz"/>
+                                    <constraint firstItem="Wbf-5x-tuv" firstAttribute="height" secondItem="JZp-Eq-IqL" secondAttribute="height" id="3CC-fz-MpB"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -65,7 +65,7 @@
         <!--Login View Controller-->
         <scene sceneID="FX8-9V-2GN">
             <objects>
-                <viewController id="81F-Y0-CHA" customClass="LoginViewController" customModule="QrProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="81F-Y0-CHA" customClass="LoginViewController" customModule="QrProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kET-oi-mpl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -126,6 +126,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oRW-ou-w0x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1629" y="388"/>
+        </scene>
+        <!--Admin View Controller-->
+        <scene sceneID="8XY-hZ-eBI">
+            <objects>
+                <viewController storyboardIdentifier="AdminVC" id="6ay-v1-EJW" customClass="AdminViewController" customModule="QrProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Gv-Zo-dqE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="2Ua-6h-3Un"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="12L-6E-1j8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2372" y="755"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="1W1-sH-ATK">

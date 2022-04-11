@@ -39,6 +39,10 @@ class LoginViewController: UIViewController {
         let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
+        if email == "admin" && password == "admin"{
+            self.adminToHome()
+        }
+        else{
         
         Auth.auth().signIn(withEmail: email, password: password){(result,error) in
             if error != nil{
@@ -51,11 +55,18 @@ class LoginViewController: UIViewController {
                 self.transitionToHome()
             }
         }
+        }
         
     }
     
-    var uidLog=""
+    func adminToHome(){
+        let adminViewControllers = storyboard?.instantiateViewController(identifier: Constants.Storyboard.adminViewController) as? AdminViewController
+        view.window?.rootViewController = adminViewControllers
+        view.window?.makeKeyAndVisible()
+    }
     
+    var uidLog=""
+
     func transitionToHome(){
         let homeViewControllers = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
         homeViewControllers?.uidLL = self.uidLog

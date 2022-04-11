@@ -82,6 +82,7 @@ class SignUpViewController: UIViewController {
                             self.showError("Error saving user data")
                       }
                     }
+                    self.transitionToLogin()
                     //self.transitionToHome()
                     
                }//End Else Auth
@@ -91,6 +92,12 @@ class SignUpViewController: UIViewController {
         }//End Else
         
     }//End sign Up tapped
+    
+    func transitionToLogin(){
+        let loginViewControllers = storyboard?.instantiateViewController(identifier: Constants.Storyboard.loginViewController) as? LoginViewController
+        view.window?.rootViewController = loginViewControllers
+        view.window?.makeKeyAndVisible()
+    }
     
     func transitionToHome(){
         let homeViewControllers = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController

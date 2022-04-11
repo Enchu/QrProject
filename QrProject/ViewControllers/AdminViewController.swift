@@ -9,9 +9,11 @@ import UIKit
 
 class AdminViewController: UIViewController {
 
+    @IBOutlet weak var searchTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        Utilities.styleTextField(searchTextField)
     }
     
 

@@ -19,9 +19,10 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
     let session = AVCaptureSession()
     
     @IBOutlet weak var qrButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        Utilities.styleFiledButton(qrButton)
         // Do any additional setup after loading the view.
     }
     

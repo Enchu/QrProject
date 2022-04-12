@@ -17,14 +17,17 @@
 		B0081E56280007A0008BFBA4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0081E55280007A0008BFBA4 /* SignUpViewController.swift */; };
 		B0081E58280007BC008BFBA4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0081E57280007BC008BFBA4 /* LoginViewController.swift */; };
 		B0081E5A280007CE008BFBA4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0081E59280007CE008BFBA4 /* HomeViewController.swift */; };
+		B00A3613280551380016BD6E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00A3612280551380016BD6E /* ContentView.swift */; };
 		B02593C12800265200A4BB8A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B02593C02800265200A4BB8A /* GoogleService-Info.plist */; };
-		B04043A52803F63D00E04565 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04043A42803F63D00E04565 /* AdminViewController.swift */; };
 		B07951D428003EFD0060E1AE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07951D328003EFD0060E1AE /* Constants.swift */; };
 		B0874ACF28002AD8007A2C4A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B0874ACE28002AD8007A2C4A /* FirebaseAnalytics */; };
 		B0874AD128002AD8007A2C4A /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = B0874AD028002AD8007A2C4A /* FirebaseAppCheck */; };
 		B0874AD328002AD8007A2C4A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B0874AD228002AD8007A2C4A /* FirebaseAuth */; };
 		B0874AD528002AD8007A2C4A /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = B0874AD428002AD8007A2C4A /* FirebaseDatabase */; };
 		B0874AD728002AD8007A2C4A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B0874AD628002AD8007A2C4A /* FirebaseFirestore */; };
+		B0C5454E28055853006E2464 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C5454D28055853006E2464 /* AdminViewController.swift */; };
+		B0D1BE6A280549E600922760 /* QFData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D1BE69280549E600922760 /* QFData.swift */; };
+		B0D1BE6C28054AC700922760 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D1BE6B28054AC700922760 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,9 +43,12 @@
 		B0081E55280007A0008BFBA4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B0081E57280007BC008BFBA4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B0081E59280007CE008BFBA4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		B00A3612280551380016BD6E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B02593C02800265200A4BB8A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B04043A42803F63D00E04565 /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		B07951D328003EFD0060E1AE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B0C5454D28055853006E2464 /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
+		B0D1BE69280549E600922760 /* QFData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QFData.swift; sourceTree = "<group>"; };
+		B0D1BE6B28054AC700922760 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +95,8 @@
 		B0081E40280006FA008BFBA4 /* QrProject */ = {
 			isa = PBXGroup;
 			children = (
+				B00A3614280551C10016BD6E /* ViewModel */,
+				B0D1BE68280549B700922760 /* Models */,
 				B006410C280011D600143E4B /* Helpers */,
 				B0081E5B280007E4008BFBA4 /* ViewControllers */,
 				B0081E41280006FA008BFBA4 /* AppDelegate.swift */,
@@ -109,9 +117,26 @@
 				B0081E55280007A0008BFBA4 /* SignUpViewController.swift */,
 				B0081E57280007BC008BFBA4 /* LoginViewController.swift */,
 				B0081E59280007CE008BFBA4 /* HomeViewController.swift */,
-				B04043A42803F63D00E04565 /* AdminViewController.swift */,
+				B0C5454D28055853006E2464 /* AdminViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		B00A3614280551C10016BD6E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B0D1BE6B28054AC700922760 /* ViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B0D1BE68280549B700922760 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B0D1BE69280549E600922760 /* QFData.swift */,
+				B00A3612280551380016BD6E /* ContentView.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,8 +221,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B04043A52803F63D00E04565 /* AdminViewController.swift in Sources */,
+				B0C5454E28055853006E2464 /* AdminViewController.swift in Sources */,
 				B0081E46280006FA008BFBA4 /* ViewController.swift in Sources */,
+				B00A3613280551380016BD6E /* ContentView.swift in Sources */,
+				B0D1BE6A280549E600922760 /* QFData.swift in Sources */,
+				B0D1BE6C28054AC700922760 /* ViewModel.swift in Sources */,
 				B0081E42280006FA008BFBA4 /* AppDelegate.swift in Sources */,
 				B006410E280011F000143E4B /* Utilities.swift in Sources */,
 				B0081E56280007A0008BFBA4 /* SignUpViewController.swift in Sources */,

@@ -19,10 +19,12 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
     let session = AVCaptureSession()
     
     @IBOutlet weak var qrButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         Utilities.styleFiledButton(qrButton)
+        Utilities.styleFiledButton(backButton)
     }
     
     func setupVideo(){
@@ -70,7 +72,7 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         
         
         let db = Firestore.firestore()
-        db.collection("qf").addDocument(data: ["dateTime":currentDateTime,"name":message,"uid":self.uidLL ])
+        db.collection("qf").addDocument(data: ["datetime":currentDateTime,"name":message,"uid":self.uidLL ])
                 {(error) in
                     if error != nil{
                         print((error?.localizedDescription)!)
@@ -88,7 +90,14 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
     @IBAction func qrTapped(_ sender: Any) {
         startRunning()
     }
-    
+    @IBAction func backTapped(_ sender: Any) {
+        self.loginToHome()
+    }
+    func loginToHome(){
+        let loginViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.loginViewController) as? LoginViewController
+        view.window?.rootViewController = loginViewController
+        view.window?.makeKeyAndVisible()
+    }
 
     
     //Работа после обнаружения QRcod
@@ -101,10 +110,9 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
                     print(object.stringValue!)
                 }))
                 present(alert, animated: true, completion: {
-                    self.addBase(object.stringValue!)    
+                    self.addBase(object.stringValue!)
+                    self.backButton.alpha = 1
                 })
-                //Hf
-                //return self.addBase(object.stringValue!)
             }
         }
         

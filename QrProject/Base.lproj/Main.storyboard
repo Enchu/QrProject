@@ -128,45 +128,22 @@
             <point key="canvasLocation" x="1629" y="388"/>
         </scene>
         <!--Admin View Controller-->
-        <scene sceneID="8XY-hZ-eBI">
+        <scene sceneID="eFu-JK-0h9">
             <objects>
-                <viewController storyboardIdentifier="AdminVC" id="6ay-v1-EJW" customClass="AdminViewController" customModule="QrProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0Gv-Zo-dqE">
+                <viewController storyboardIdentifier="AdminVC" id="wU5-2z-x8Z" customClass="AdminViewController" customModule="QrProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7ee-ei-YUL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="05k-bv-oYe">
-                                <rect key="frame" x="40" y="84" width="334" height="50"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NWa-wB-FGj">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="fGN-Pt-vj6"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="searchTaped:" destination="6ay-v1-EJW" eventType="editingDidEnd" id="Zq7-bo-j2a"/>
-                                        </connections>
-                                    </textField>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="2Ua-6h-3Un"/>
+                        <viewLayoutGuide key="safeArea" id="2e7-lb-8ZD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="2Ua-6h-3Un" firstAttribute="trailing" secondItem="05k-bv-oYe" secondAttribute="trailing" constant="40" id="QdF-dE-DTg"/>
-                            <constraint firstItem="05k-bv-oYe" firstAttribute="top" secondItem="2Ua-6h-3Un" secondAttribute="top" constant="40" id="gl2-xd-slA"/>
-                            <constraint firstItem="05k-bv-oYe" firstAttribute="leading" secondItem="2Ua-6h-3Un" secondAttribute="leading" constant="40" id="yqA-JE-bbO"/>
-                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="searchTextField" destination="NWa-wB-FGj" id="fO1-WW-Syl"/>
+                        <outlet property="theContainer" destination="7ee-ei-YUL" id="QEJ-Sz-4z0"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="12L-6E-1j8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="afM-f2-uDS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2372" y="755"/>
+            <point key="canvasLocation" x="2429" y="740"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="1W1-sH-ATK">
@@ -266,15 +243,35 @@
                                     <action selector="qrTapped:" destination="cYS-tF-eKT" eventType="touchUpInside" id="3Fj-F5-TEf"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Jnm-bH-bYx">
+                                <rect key="frame" x="40" y="802" width="334" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tzo-Lk-q6m">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="i2j-rg-vC9"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Back"/>
+                                        <connections>
+                                            <action selector="backTapped:" destination="cYS-tF-eKT" eventType="touchUpInside" id="1Tb-yZ-bou"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YVU-MZ-5tQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="YVU-MZ-5tQ" firstAttribute="bottom" secondItem="Jnm-bH-bYx" secondAttribute="bottom" constant="10" id="AZF-rP-0K7"/>
                             <constraint firstItem="a09-pQ-mex" firstAttribute="centerX" secondItem="Ah4-xi-xQp" secondAttribute="centerX" id="DmI-w8-JOv"/>
+                            <constraint firstItem="YVU-MZ-5tQ" firstAttribute="trailing" secondItem="Jnm-bH-bYx" secondAttribute="trailing" constant="40" id="HlN-81-fIZ"/>
                             <constraint firstItem="a09-pQ-mex" firstAttribute="centerY" secondItem="Ah4-xi-xQp" secondAttribute="centerY" id="QV0-ex-AM5"/>
+                            <constraint firstItem="Jnm-bH-bYx" firstAttribute="leading" secondItem="YVU-MZ-5tQ" secondAttribute="leading" constant="40" id="rCC-Nd-o3Q"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="Tzo-Lk-q6m" id="9uJ-QL-08G"/>
                         <outlet property="qrButton" destination="a09-pQ-mex" id="O03-du-H3F"/>
                     </connections>
                 </viewController>

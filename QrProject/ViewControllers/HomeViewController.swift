@@ -100,11 +100,14 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
                 alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { (action) in
                     print(object.stringValue!)
                 }))
-                present(alert, animated: true, completion: nil)
+                present(alert, animated: true, completion: {
+                    self.addBase(object.stringValue!)    
+                })
                 //Hf
-                return self.addBase(object.stringValue!)
+                //return self.addBase(object.stringValue!)
             }
         }
+        
     }
   
     

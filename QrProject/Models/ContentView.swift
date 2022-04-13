@@ -7,6 +7,7 @@
 import UIKit
 import SwiftUI
 import Firebase
+import CoreMedia
 
 struct ContentView: View {
     
@@ -16,17 +17,45 @@ struct ContentView: View {
     @State var name = ""
     @State var uid = ""
     
+    @State var txt = ""
+    
     var body: some View {
+        
         //Search
-        NavigationView{
+        NavigationView(){
             ZStack(alignment: .top){
                 GeometryReader{_ in
                 }.background(Color("Color").edgesIgnoringSafeArea(.all))
-                customSearchBar(data: self.$model.list).padding(.top)
+                
+                VStack (spacing: 0){
+                    HStack(alignment: .top){
+                        
+                        TextField("Search", text: self.$txt)
+                        if self.txt != ""{
+                            Button(action: {
+                                self.txt = ""
+                            }, label: {Text("Cansel")}).foregroundColor(.black)
+                        }
+                    }.padding()
+                    if self.txt != ""{
+                        if self.model.list.filter({$0.datetime.lowercased().contains(self.txt.lowercased())}).count == 0
+                        {
+                            Text("No result").foregroundColor(Color.black.opacity(0.5)).padding()
+                        }
+                        else{
+                            List(self.model.list.filter{$0.datetime.lowercased().contains(self.txt.lowercased())})
+                            {i in
+                                NavigationLink(destination: Detail(data: i)){
+                                    Text(i.name)
+                                    Text(i.datetime)
+                                }
+                            }.frame(height: UIScreen.main.bounds.height / 5)//.frame(height: UIScene.main.bounds.height / 5)
+                        }
+                    }
+                }.background(Color.white).padding()
                 //model.searchData(qfUpdate: item)
             }
-        }.navigationTitle("")
-            .navigationBarHidden(true)
+        }.navigationTitle("").navigationBarHidden(true)
        
         
         //
@@ -101,32 +130,12 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct customSearchBar : View {
-    @Binding var data:[QFData]
-    @State var txt = ""
-    
-    var body : some View{
-        VStack(spacing: 0){
-            HStack{
-                TextField("Search", text: self.$txt)
-                if self.txt != ""{
-                    Button(action: {
-                        self.txt = ""
-                    }, label: {Text("Cansel")}).foregroundColor(.black)
-                }
-            }.padding()
-            /*if self.txt != ""{
-                List(self.data.filter{
-                    $0.datetime.lowercased().contains(self.txt.lowercased())}
-                     {i in
-                        Text(i.name)
-                    }
-                )
-            }*/
-            
-            
-        }.background(Color.white).padding()
+
+struct Detail: View{
+    var data : QFData
+    var body: some View{
+        Text(data.name)
+        Text(data.datetime)
+        Text(data.uid)
     }
 }
-
-

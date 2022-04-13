@@ -18,11 +18,5 @@ class AdminViewController: UIViewController {
         addChild(chieldView)
         chieldView.view.frame = theContainer.bounds
         theContainer.addSubview(chieldView.view)
-        
-    }
-    func loginToHome(){
-        let loginViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.loginViewController) as? LoginViewController
-        view.window?.rootViewController = loginViewController
-        view.window?.makeKeyAndVisible()
     }
 }

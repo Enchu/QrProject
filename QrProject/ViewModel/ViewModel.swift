@@ -37,9 +37,9 @@ class ViewModel: ObservableObject{
         }
     }
     
-    func addData(datetime:String,name:String){
+    func addData(datetime:String,name:String,notes:String){
         let db = Firestore.firestore()
-        db.collection("qf").addDocument(data: ["datetime":datetime, "name":name]){
+        db.collection("qf").addDocument(data: ["datetime":datetime, "name":name,"notes":notes]){
             error in
             if error == nil{
                 self.getData()
@@ -62,7 +62,8 @@ class ViewModel: ObservableObject{
                 let datetime = i.get("datetime") as! String
                 let name = i.get("name") as! String
                 let uid = i.get("uid") as! String
-                self.list.append(QFData(id: id, name: name, datetime: datetime, uid: uid))
+                let notes = i.get("notes") as! String
+                self.list.append(QFData(id: id, name: name, datetime: datetime, uid: uid,notes: notes))
         }
     }
     }
@@ -80,7 +81,8 @@ class ViewModel: ObservableObject{
                             //Crate a QF item for each document returned
                             return QFData(id: d.documentID, name: d["name"] as? String ?? "",
                                           datetime: d["datetime"] as? String ?? "",
-                                          uid: d["uid"] as? String ?? "")
+                                          uid: d["uid"] as? String ?? "",
+                                          notes:d["notes"] as? String ?? "")
                         }
                     }
                     

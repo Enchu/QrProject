@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,7 +26,7 @@
                                             <constraint firstAttribute="height" constant="50" id="xBC-Pv-RBg"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Sign Up"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Регистрация"/>
                                         <connections>
                                             <segue destination="gJi-ma-P5X" kind="show" id="mtH-oB-5If"/>
                                         </connections>
@@ -33,7 +34,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wbf-5x-tuv">
                                         <rect key="frame" x="0.0" y="70" width="334" height="50"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Login"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Авторизация"/>
                                         <connections>
                                             <segue destination="81F-Y0-CHA" kind="show" id="UDw-Ao-wpT"/>
                                         </connections>
@@ -62,7 +63,7 @@
             </objects>
             <point key="canvasLocation" x="864" y="68"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Авторизация-->
         <scene sceneID="FX8-9V-2GN">
             <objects>
                 <viewController storyboardIdentifier="LoginVC" id="81F-Y0-CHA" customClass="LoginViewController" customModule="QrProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -89,7 +90,7 @@
                                             <constraint firstAttribute="height" constant="50" id="7oD-g2-zWV"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Login"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Авторизоваться"/>
                                         <connections>
                                             <action selector="loginTapped:" destination="81F-Y0-CHA" eventType="touchUpInside" id="rZF-DL-TML"/>
                                         </connections>
@@ -115,7 +116,9 @@
                             <constraint firstItem="ZZN-p1-ixd" firstAttribute="leading" secondItem="mcE-DX-QEV" secondAttribute="leading" constant="40" id="mbK-AA-poZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Xyg-El-bdk"/>
+                    <navigationItem key="navigationItem" title="Авторизация" id="Xyg-El-bdk">
+                        <barButtonItem key="backBarButtonItem" title="Назад" id="fT5-jo-hf3"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="emailTextField" destination="dlv-dS-0oo" id="Ryz-a4-0lC"/>
                         <outlet property="errorLabel" destination="DKO-jh-aqx" id="ALt-Jg-KYV"/>
@@ -134,10 +137,23 @@
                     <view key="view" contentMode="scaleToFill" id="7ee-ei-YUL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="0Fi-w1-XaH">
+                                <rect key="frame" x="174" y="432" width="66" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" name="Color"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Назад"/>
+                                <connections>
+                                    <action selector="backTapped:" destination="wU5-2z-x8Z" eventType="touchUpInside" id="ygl-dy-7rJ"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="2e7-lb-8ZD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="0Fi-w1-XaH" id="5ej-On-EcP"/>
                         <outlet property="theContainer" destination="7ee-ei-YUL" id="QEJ-Sz-4z0"/>
                     </connections>
                 </viewController>
@@ -145,7 +161,7 @@
             </objects>
             <point key="canvasLocation" x="2429" y="740"/>
         </scene>
-        <!--Sign Up View Controller-->
+        <!--Регистрация-->
         <scene sceneID="1W1-sH-ATK">
             <objects>
                 <viewController id="gJi-ma-P5X" customClass="SignUpViewController" customModule="QrProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -156,12 +172,12 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="HfA-Hy-1QP">
                                 <rect key="frame" x="40" y="128" width="334" height="370.5"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZEc-hI-AnB">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Имя" textAlignment="natural" minimumFontSize="17" background="first" translatesAutoresizingMaskIntoConstraints="NO" id="ZEc-hI-AnB">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HdO-Zy-g77">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Фамилие" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HdO-Zy-g77">
                                         <rect key="frame" x="0.0" y="70" width="334" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -182,7 +198,7 @@
                                             <constraint firstAttribute="height" constant="50" id="x0g-cM-apW"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Sign Up"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Зарегистрироваться"/>
                                         <connections>
                                             <action selector="signUpTapped:" destination="gJi-ma-P5X" eventType="touchUpInside" id="4dT-ak-YFs"/>
                                         </connections>
@@ -210,7 +226,9 @@
                             <constraint firstItem="f9l-bP-vHc" firstAttribute="trailing" secondItem="HfA-Hy-1QP" secondAttribute="trailing" constant="40" id="ewV-4n-zBT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="yQ1-P2-uNi"/>
+                    <navigationItem key="navigationItem" title="Регистрация" id="yQ1-P2-uNi">
+                        <barButtonItem key="backBarButtonItem" title="Назад" id="tEA-eZ-qwZ"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="emailTextField" destination="RiL-6h-GNf" id="TBb-36-7GT"/>
                         <outlet property="errorLabel" destination="2jw-Vq-mXA" id="TSr-3Q-CGk"/>
@@ -233,12 +251,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a09-pQ-mex">
-                                <rect key="frame" x="149.5" y="428" width="115.5" height="40"/>
+                                <rect key="frame" x="151" y="428" width="112" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="OOZ-zj-TU7"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Scan QR code"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Сканировать"/>
                                 <connections>
                                     <action selector="qrTapped:" destination="cYS-tF-eKT" eventType="touchUpInside" id="3Fj-F5-TEf"/>
                                 </connections>
@@ -252,7 +270,7 @@
                                             <constraint firstAttribute="height" constant="50" id="i2j-rg-vC9"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Back"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Назад"/>
                                         <connections>
                                             <action selector="backTapped:" destination="cYS-tF-eKT" eventType="touchUpInside" id="1Tb-yZ-bou"/>
                                         </connections>
@@ -299,6 +317,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="first" width="30" height="30"/>
+        <namedColor name="Color">
+            <color red="0.94499999284744263" green="0.94499999284744263" blue="0.94499999284744263" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

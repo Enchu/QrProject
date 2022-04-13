@@ -20,46 +20,42 @@ struct ContentView: View {
     @State var txt = ""
     
     var body: some View {
-        
-        //Search
+        //search
         NavigationView(){
             ZStack(alignment: .top){
-                GeometryReader{_ in
-                }.background(Color("Color").edgesIgnoringSafeArea(.all))
-                
                 VStack (spacing: 0){
-                    HStack(alignment: .top){
-                        
-                        TextField("Search", text: self.$txt)
+                    HStack(){
+                        TextField("Поиск", text: self.$txt).textFieldStyle(RoundedBorderTextFieldStyle())
                         if self.txt != ""{
                             Button(action: {
                                 self.txt = ""
-                            }, label: {Text("Cansel")}).foregroundColor(.black)
+                            }, label: {Text("Закрыть")})
                         }
                     }.padding()
+                    
                     if self.txt != ""{
                         if self.model.list.filter({$0.datetime.lowercased().contains(self.txt.lowercased())}).count == 0
                         {
-                            Text("No result").foregroundColor(Color.black.opacity(0.5)).padding()
+                            Text("Нет результата").padding()
                         }
                         else{
                             List(self.model.list.filter{$0.datetime.lowercased().contains(self.txt.lowercased())})
                             {i in
                                 NavigationLink(destination: Detail(data: i)){
-                                    Text(i.name)
-                                    Text(i.datetime)
+                                Text(i.name)
+                                Text(i.datetime)
                                 }
-                            }.frame(height: UIScreen.main.bounds.height / 5)//.frame(height: UIScene.main.bounds.height / 5)
+                            }.frame(height: UIScreen.main.bounds.height / 5)
                         }
                     }
-                }.background(Color.white).padding()
+                }
+                //CustomSearchBar(data: self.$model.list).padding(.top)
                 //model.searchData(qfUpdate: item)
-            }
-        }.navigationTitle("").navigationBarHidden(true)
-       
+        }
+    }.navigationTitle("").navigationBarHidden(true)
         
-        //
-        VStack{
+        //Update
+        VStack(spacing: 0){
         List(model.list){
             item in
             HStack{
@@ -69,7 +65,7 @@ struct ContentView: View {
                 
                 //Updata data
                 Button(action: {
-                    model.updataData(qfUpdate: item)
+                    //model.updataData(qfUpdate: item)
                 }, label: {
                     Image(systemName: "pencil")
                 })
@@ -84,7 +80,7 @@ struct ContentView: View {
                 .buttonStyle(BorderedButtonStyle())
             }
         }
-            Divider()
+            /*Divider()
             //Add data
             VStack(spacing:5){
                 TextField("datetime",text: $datetime)
@@ -102,18 +98,19 @@ struct ContentView: View {
                     Text("Add data item")
                 })
             }.padding()
-
+             */
         }//End VStack
         
+        
         //Back to Login Page
-        VStack(spacing:5){
+        /*VStack(spacing:5){
             Button(action: {
                 
             }, label: {
                 Text("Back")
             })
             .buttonStyle(BorderedButtonStyle())
-        }.padding()
+        }.padding()*/
         
         
     }
@@ -131,11 +128,48 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 
+struct CustomSearchBar:View{
+    
+    @ObservedObject var model = ViewModel()
+    @Binding var data : [QFData]
+    @State var txt = ""
+    
+    var body: some View{
+        VStack (spacing: 0){
+            HStack(){
+                TextField("Поиск", text: self.$txt)
+                if self.txt != ""{
+                    Button(action: {
+                        self.txt = ""
+                    }, label: {Text("Закрыть")}).foregroundColor(.black)
+                }
+            }.padding()
+            if self.txt != ""{
+                if self.model.list.filter({$0.datetime.lowercased().contains(self.txt.lowercased())}).count == 0
+                {
+                    Text("Нет результата").foregroundColor(Color.black.opacity(0.5)).padding()
+                }
+                else{
+                    List(self.model.list.filter{$0.datetime.lowercased().contains(self.txt.lowercased())})
+                    {i in
+                        NavigationLink(destination: Detail(data: i)){
+                            Text(i.name)
+                            Text(i.datetime)
+                        }
+                    }.frame(height: UIScreen.main.bounds.height / 5)//.frame(height: UIScene.main.bounds.height / 5)
+                }
+            }
+        }.background(Color.white).padding()
+        
+    }//End View
+}
+
 struct Detail: View{
     var data : QFData
     var body: some View{
         Text(data.name)
         Text(data.datetime)
-        Text(data.uid)
+        //Text(data.uid)
+        Text(data.notes)
     }
 }

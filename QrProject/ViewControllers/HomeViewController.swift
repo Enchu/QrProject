@@ -70,9 +70,9 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         dateFormatter.locale = Locale(identifier: "ru_Ru")
         let currentDateTime = dateFormatter.string(from: dateString)
         
-        
+        let notes = ""
         let db = Firestore.firestore()
-        db.collection("qf").addDocument(data: ["datetime":currentDateTime,"name":message,"uid":self.uidLL ])
+        db.collection("qf").addDocument(data: ["datetime":currentDateTime,"name":message,"uid":self.uidLL,"notes":notes ])
                 {(error) in
                     if error != nil{
                         print((error?.localizedDescription)!)

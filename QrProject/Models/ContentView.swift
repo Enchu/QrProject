@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 import CoreMedia
 
+
 struct ContentView: View {
     
     @ObservedObject var model = ViewModel()
@@ -16,10 +17,12 @@ struct ContentView: View {
     @State var datetime = ""
     @State var name = ""
     @State var uid = ""
+    @State var notes = ""
     
     @State var txt = ""
     
     var body: some View {
+        
         //search
         NavigationView(){
             ZStack(alignment: .top){
@@ -29,14 +32,14 @@ struct ContentView: View {
                         if self.txt != ""{
                             Button(action: {
                                 self.txt = ""
-                            }, label: {Text("Закрыть")})
+                            }, label: {Text("Закрыть")}).foregroundColor(.black)
                         }
                     }.padding()
                     
                     if self.txt != ""{
                         if self.model.list.filter({$0.datetime.lowercased().contains(self.txt.lowercased())}).count == 0
                         {
-                            Text("Нет результата").padding()
+                            Text("Нет результата").padding().foregroundColor(Color.black.opacity(0.5)).padding()
                         }
                         else{
                             List(self.model.list.filter{$0.datetime.lowercased().contains(self.txt.lowercased())})
@@ -52,14 +55,12 @@ struct ContentView: View {
                 //CustomSearchBar(data: self.$model.list).padding(.top)
                 //model.searchData(qfUpdate: item)
         }
-    }.navigationTitle("").navigationBarHidden(true)
+        }.navigationTitle("").navigationBarHidden(true)
         
-        Spacer()
         
-        //Update and Delte
+        //Update and Delete
         VStack(spacing: 0){
-        List(model.list){
-            item in
+        List(model.list){ item in
             HStack{
                 if(item.notes == "")
                 {
@@ -76,7 +77,7 @@ struct ContentView: View {
                 
                 //Updata data
                 Button(action: {
-                    //model.updataData(qfUpdate: item)
+                    model.updataData(qfUpdate: item)
                 }, label: {
                     Image(systemName: "pencil")
                 })
@@ -91,6 +92,8 @@ struct ContentView: View {
                 .buttonStyle(BorderedButtonStyle())
             }
         }
+            
+            
             /*Divider()
             //Add data
             VStack(spacing:5){
@@ -167,7 +170,7 @@ struct CustomSearchBar:View{
                             Text(i.name)
                             Text(i.datetime)
                         }
-                    }.frame(height: UIScreen.main.bounds.height / 5)//.frame(height: UIScene.main.bounds.height / 5)
+                    }.frame(height: UIScreen.main.bounds.height / 5)
                 }
             }
         }.background(Color.white).padding()
@@ -175,12 +178,40 @@ struct CustomSearchBar:View{
     }//End View
 }
 
+
 struct Detail: View{
     var data : QFData
+    @ObservedObject var model = ViewModel()
+    @State var datetime = ""
+    @State var name = ""
+    @State var uid = ""
+    @State var notes = ""
+    
+    @State var isHidden = false
+    
     var body: some View{
         Text(data.name)
         Text(data.datetime)
         //Text(data.uid)
         Text(data.notes)
+        
+        /*List(model.list){item in
+            HStack{
+                    Text(item.datetime).background().colorMultiply(.green)
+                    Text(item.name).background().colorMultiply(.green)
+            }
+            Divider()
+            VStack(spacing:5){
+                TextField("Комментарий",text: $notes)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                Button(action: {
+                    model.updataData(qfUpdate: item)
+                }, label: {
+                }).buttonStyle(BorderedButtonStyle())
+            }.padding()
+        }.opacity(isHidden ? 0 : 1)
+        Button("Tougle"){
+            isHidden.toggle()
+        }*/
     }
 }

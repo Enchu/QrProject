@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class Utilities{
-    
+     
     static func styleTextField(_ textField:UITextField){
         let bottomLine = CALayer()
         
@@ -23,7 +23,8 @@ class Utilities{
         textField.layer.addSublayer(bottomLine)
     }
     static func styleFiledButton(_ button:UIButton){
-        button.backgroundColor = UIColor.init(red: 130/255, green: 135/255, blue: 253/255, alpha:1)
+        //button.backgroundColor = UIColor.init(red: 51/255, green: 122/255, blue: 183/255, alpha:1)
+        button.backgroundColor = UIColor.init(red: 0/255, green: 37/255, blue: 89/255, alpha:1)
         button.layer.cornerRadius = 25.0
         button.tintColor = UIColor.white
     }

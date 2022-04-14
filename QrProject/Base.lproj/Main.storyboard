@@ -3,13 +3,12 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Мобильный обходчик-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="QrProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -44,16 +43,26 @@
                                     <constraint firstItem="Wbf-5x-tuv" firstAttribute="height" secondItem="JZp-Eq-IqL" secondAttribute="height" id="3CC-fz-MpB"/>
                                 </constraints>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="Nqk-NI-zry">
+                                <rect key="frame" x="7" y="248" width="400" height="400"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="7oH-OA-RDh"/>
+                                    <constraint firstAttribute="width" constant="400" id="Eb1-8D-46V"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.47843137254901957" blue="0.71764705882352942" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" systemColor="tintColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Jns-Gy-bZ1" secondAttribute="bottom" constant="40" id="Ghe-Z9-B7w"/>
+                            <constraint firstItem="Nqk-NI-zry" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Igg-n2-bSw"/>
                             <constraint firstItem="Jns-Gy-bZ1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="cgv-Jn-bz5"/>
+                            <constraint firstItem="Nqk-NI-zry" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="iWI-fl-9yR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Jns-Gy-bZ1" secondAttribute="trailing" constant="40" id="yim-Qz-Rs3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="YCc-eF-xRd"/>
+                    <navigationItem key="navigationItem" title="Мобильный обходчик" largeTitleDisplayMode="never" id="0Zp-NF-oo7"/>
                     <connections>
                         <outlet property="loginButton" destination="Wbf-5x-tuv" id="1go-QF-nfv"/>
                         <outlet property="signUpButton" destination="JZp-Eq-IqL" id="pAb-MB-9bx"/>
@@ -74,13 +83,15 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZZN-p1-ixd">
                                 <rect key="frame" x="40" y="128" width="334" height="230.5"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dlv-dS-0oo">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Логин" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dlv-dS-0oo">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HM6-jQ-Mja">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HM6-jQ-Mja">
                                         <rect key="frame" x="0.0" y="70" width="334" height="50"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -109,16 +120,15 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mcE-DX-QEV"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.47843137250000001" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.0" green="0.1450980392" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ZZN-p1-ixd" firstAttribute="top" secondItem="mcE-DX-QEV" secondAttribute="top" constant="40" id="V70-Mb-zrJ"/>
                             <constraint firstItem="mcE-DX-QEV" firstAttribute="trailing" secondItem="ZZN-p1-ixd" secondAttribute="trailing" constant="40" id="gBL-48-lYc"/>
                             <constraint firstItem="ZZN-p1-ixd" firstAttribute="leading" secondItem="mcE-DX-QEV" secondAttribute="leading" constant="40" id="mbK-AA-poZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Авторизация" id="Xyg-El-bdk">
-                        <barButtonItem key="backBarButtonItem" title="Назад" id="fT5-jo-hf3"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Авторизация" id="Xyg-El-bdk"/>
                     <connections>
                         <outlet property="emailTextField" destination="dlv-dS-0oo" id="Ryz-a4-0lC"/>
                         <outlet property="errorLabel" destination="DKO-jh-aqx" id="ALt-Jg-KYV"/>
@@ -137,23 +147,10 @@
                     <view key="view" contentMode="scaleToFill" id="7ee-ei-YUL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="0Fi-w1-XaH">
-                                <rect key="frame" x="174" y="432" width="66" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" name="Color"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Назад"/>
-                                <connections>
-                                    <action selector="backTapped:" destination="wU5-2z-x8Z" eventType="touchUpInside" id="ygl-dy-7rJ"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="2e7-lb-8ZD"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.47843137250000001" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="backButton" destination="0Fi-w1-XaH" id="5ej-On-EcP"/>
                         <outlet property="theContainer" destination="7ee-ei-YUL" id="QEJ-Sz-4z0"/>
                     </connections>
                 </viewController>
@@ -182,12 +179,12 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RiL-6h-GNf">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Логин" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RiL-6h-GNf">
                                         <rect key="frame" x="0.0" y="140" width="334" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9ev-2j-QCv">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9ev-2j-QCv">
                                         <rect key="frame" x="0.0" y="210" width="334" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -219,16 +216,15 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="f9l-bP-vHc"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.47843137250000001" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.0" green="0.1450980392" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="HfA-Hy-1QP" firstAttribute="top" secondItem="f9l-bP-vHc" secondAttribute="top" constant="40" id="6CH-gN-E7M"/>
                             <constraint firstItem="HfA-Hy-1QP" firstAttribute="leading" secondItem="f9l-bP-vHc" secondAttribute="leading" constant="40" id="LbK-Wd-D9U"/>
                             <constraint firstItem="f9l-bP-vHc" firstAttribute="trailing" secondItem="HfA-Hy-1QP" secondAttribute="trailing" constant="40" id="ewV-4n-zBT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Регистрация" id="yQ1-P2-uNi">
-                        <barButtonItem key="backBarButtonItem" title="Назад" id="tEA-eZ-qwZ"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Регистрация" id="yQ1-P2-uNi"/>
                     <connections>
                         <outlet property="emailTextField" destination="RiL-6h-GNf" id="TBb-36-7GT"/>
                         <outlet property="errorLabel" destination="2jw-Vq-mXA" id="TSr-3Q-CGk"/>
@@ -279,7 +275,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YVU-MZ-5tQ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.47843137250000001" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="YVU-MZ-5tQ" firstAttribute="bottom" secondItem="Jnm-bH-bYx" secondAttribute="bottom" constant="10" id="AZF-rP-0K7"/>
                             <constraint firstItem="a09-pQ-mex" firstAttribute="centerX" secondItem="Ah4-xi-xQp" secondAttribute="centerX" id="DmI-w8-JOv"/>
@@ -316,16 +312,15 @@
             <point key="canvasLocation" x="32" y="68"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.0" green="0.1450980392" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
+        <image name="Image" width="108" height="40.5"/>
         <image name="first" width="30" height="30"/>
-        <namedColor name="Color">
-            <color red="0.94499999284744263" green="0.94499999284744263" blue="0.94499999284744263" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

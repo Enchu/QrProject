@@ -14,7 +14,8 @@ class ViewModel: ObservableObject{
     func updataData(qfUpdate:QFData){
         let db = Firestore.firestore()
         
-        db.collection("qf").document(qfUpdate.id).setData(["name": (qfUpdate.name)],merge: true){ error in
+        db.collection("qf").document(qfUpdate.id).setData(["notes": (qfUpdate.notes)],merge: true){ error in
+        //db.collection("qf").document(qfUpdate.id).setData(["notes": notes],merge: true){ error in
             if error == nil{
                 self.getData()
             }

@@ -42,12 +42,12 @@ class SignUpViewController: UIViewController {
             emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""
         {
-            return "Please fill in all fields."
+            return "Заполните все поля"
         }
         
         let CleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         if Utilities.isPasswordValid(CleanedPassword) == false{
-            return "Please make sure your password is at least 8 characters"
+            return "Пожалуйста, убедитесь, что ваш пароль состоит не менее чем из 6 символов,содержащий специальный символ и число"
         }
         
         return nil
@@ -80,7 +80,7 @@ class SignUpViewController: UIViewController {
             
             Auth.auth().createUser(withEmail: email, password: password){ (result,err) in
                 if err != nil{
-                    self.showError("Error creating user")
+                    self.showError("Ошибка создания пользователя")
                 }
                 else{
                     let db = Firestore.firestore()
@@ -88,7 +88,7 @@ class SignUpViewController: UIViewController {
                     db.collection("users").addDocument(data: ["firstname":firstname,"lastname":lastname,"uid": result!.user.uid,"datetime":currentDateTime])
                     {(error) in
                         if error != nil {
-                            self.showError("Error saving user data")
+                            self.showError("Ошибка сохранения в базе данных")
                       }
                     }
                     self.transitionToLogin()

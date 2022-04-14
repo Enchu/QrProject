@@ -54,13 +54,24 @@ struct ContentView: View {
         }
     }.navigationTitle("").navigationBarHidden(true)
         
-        //Update
+        Spacer()
+        
+        //Update and Delte
         VStack(spacing: 0){
         List(model.list){
             item in
             HStack{
-                Text(item.datetime)
-                Text(item.name)
+                if(item.notes == "")
+                {
+                    Text(item.datetime).background().colorMultiply(.green)
+                    Text(item.name).background().colorMultiply(.green)
+                }
+                else{
+                    Text(item.datetime).background().colorMultiply(.red)
+                    Text(item.name).background().colorMultiply(.red)
+                    
+                }
+                
                 Spacer()
                 
                 //Updata data

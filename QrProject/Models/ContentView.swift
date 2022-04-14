@@ -83,7 +83,7 @@ struct ContentView: View {
                 })
                 .buttonStyle(BorderedButtonStyle())
                 
-                //delete
+                //Delete data
                 Button(action: {
                     model.deleteData(qfDelete: item)
                 }, label: {

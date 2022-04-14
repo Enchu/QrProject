@@ -1,0 +1,72 @@
+
+/* Class = "UINavigationItem"; title = "QR сканер"; ObjectID = "0U9-IU-G1a"; */
+"0U9-IU-G1a.title" = "QR сканер";
+
+/* Class = "UINavigationItem"; title = "Мобильный обходчик"; ObjectID = "0Zp-NF-oo7"; */
+"0Zp-NF-oo7.title" = "Мобильный обходчик";
+
+/* Class = "UILabel"; text = "Error"; ObjectID = "2jw-Vq-mXA"; */
+"2jw-Vq-mXA.text" = "Error";
+
+/* Class = "UIButton"; configuration.title = "Авторизоваться"; ObjectID = "66s-JM-uwe"; */
+"66s-JM-uwe.configuration.title" = "Авторизоваться";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "66s-JM-uwe"; */
+"66s-JM-uwe.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Пароль"; ObjectID = "9ev-2j-QCv"; */
+"9ev-2j-QCv.placeholder" = "Пароль";
+
+/* Class = "UILabel"; text = "Error"; ObjectID = "DKO-jh-aqx"; */
+"DKO-jh-aqx.text" = "Error";
+
+/* Class = "UITextField"; placeholder = "Пароль"; ObjectID = "HM6-jQ-Mja"; */
+"HM6-jQ-Mja.placeholder" = "Пароль";
+
+/* Class = "UITextField"; placeholder = "Фамилие"; ObjectID = "HdO-Zy-g77"; */
+"HdO-Zy-g77.placeholder" = "Фамилие";
+
+/* Class = "UIButton"; configuration.title = "Зарегистрироваться"; ObjectID = "J4r-S3-xkZ"; */
+"J4r-S3-xkZ.configuration.title" = "Зарегистрироваться";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "J4r-S3-xkZ"; */
+"J4r-S3-xkZ.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Регистрация"; ObjectID = "JZp-Eq-IqL"; */
+"JZp-Eq-IqL.configuration.title" = "Регистрация";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "JZp-Eq-IqL"; */
+"JZp-Eq-IqL.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Логин"; ObjectID = "RiL-6h-GNf"; */
+"RiL-6h-GNf.placeholder" = "Логин";
+
+/* Class = "UIButton"; configuration.title = "Назад"; ObjectID = "Tzo-Lk-q6m"; */
+"Tzo-Lk-q6m.configuration.title" = "Назад";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Tzo-Lk-q6m"; */
+"Tzo-Lk-q6m.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Авторизация"; ObjectID = "Wbf-5x-tuv"; */
+"Wbf-5x-tuv.configuration.title" = "Авторизация";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Wbf-5x-tuv"; */
+"Wbf-5x-tuv.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "Авторизация"; ObjectID = "Xyg-El-bdk"; */
+"Xyg-El-bdk.title" = "Авторизация";
+
+/* Class = "UITextField"; placeholder = "Имя"; ObjectID = "ZEc-hI-AnB"; */
+"ZEc-hI-AnB.placeholder" = "Имя";
+
+/* Class = "UIButton"; configuration.title = "Сканировать"; ObjectID = "a09-pQ-mex"; */
+"a09-pQ-mex.configuration.title" = "Сканировать";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "a09-pQ-mex"; */
+"a09-pQ-mex.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Логин"; ObjectID = "dlv-dS-0oo"; */
+"dlv-dS-0oo.placeholder" = "Логин";
+
+/* Class = "UINavigationItem"; title = "Регистрация"; ObjectID = "yQ1-P2-uNi"; */
+"yQ1-P2-uNi.title" = "Регистрация";

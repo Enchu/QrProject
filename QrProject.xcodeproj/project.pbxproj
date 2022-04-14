@@ -46,6 +46,7 @@
 		B00A3612280551380016BD6E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B02593C02800265200A4BB8A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B07951D328003EFD0060E1AE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B08EC5E52808436C009CED54 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		B0C5454D28055853006E2464 /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		B0D1BE69280549E600922760 /* QFData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QFData.swift; sourceTree = "<group>"; };
 		B0D1BE6B28054AC700922760 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -243,6 +244,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B0081E48280006FA008BFBA4 /* Base */,
+				B08EC5E52808436C009CED54 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

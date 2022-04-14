@@ -18,6 +18,7 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
     //1. Настроим сессию
     let session = AVCaptureSession()
     
+    @IBOutlet weak var notesTextField: UITextField!
     @IBOutlet weak var qrButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     
@@ -25,6 +26,7 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         super.viewDidLoad()
         Utilities.styleFiledButton(qrButton)
         Utilities.styleFiledButton(backButton)
+        Utilities.styleTextField(notesTextField)
     }
     
     func setupVideo(){
@@ -70,7 +72,8 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         dateFormatter.locale = Locale(identifier: "ru_Ru")
         let currentDateTime = dateFormatter.string(from: dateString)
         
-        let notes = ""
+        let notes = notesTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
         let db = Firestore.firestore()
         db.collection("qf").addDocument(data: ["datetime":currentDateTime,"name":message,"uid":self.uidLL,"notes":notes ])
                 {(error) in

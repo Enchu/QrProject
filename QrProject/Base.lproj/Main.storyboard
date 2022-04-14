@@ -258,10 +258,15 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Jnm-bH-bYx">
-                                <rect key="frame" x="40" y="802" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="84"/>
                                 <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Заметка" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjs-9X-sw7">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tzo-Lk-q6m">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
+                                        <rect key="frame" x="0.0" y="34" width="334" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="i2j-rg-vC9"/>
                                         </constraints>
@@ -286,6 +291,7 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="Tzo-Lk-q6m" id="9uJ-QL-08G"/>
+                        <outlet property="notesTextField" destination="tjs-9X-sw7" id="X0I-bi-Y2u"/>
                         <outlet property="qrButton" destination="a09-pQ-mex" id="O03-du-H3F"/>
                     </connections>
                 </viewController>

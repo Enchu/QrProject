@@ -25,6 +25,7 @@
 		B0874AD328002AD8007A2C4A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B0874AD228002AD8007A2C4A /* FirebaseAuth */; };
 		B0874AD528002AD8007A2C4A /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = B0874AD428002AD8007A2C4A /* FirebaseDatabase */; };
 		B0874AD728002AD8007A2C4A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B0874AD628002AD8007A2C4A /* FirebaseFirestore */; };
+		B0C39D82280D3EA700768C49 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B0C39D81280D3EA700768C49 /* FirebaseStorage */; };
 		B0C5454E28055853006E2464 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C5454D28055853006E2464 /* AdminViewController.swift */; };
 		B0D1BE6A280549E600922760 /* QFData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D1BE69280549E600922760 /* QFData.swift */; };
 		B0D1BE6C28054AC700922760 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D1BE6B28054AC700922760 /* ViewModel.swift */; };
@@ -62,6 +63,7 @@
 				B0874AD128002AD8007A2C4A /* FirebaseAppCheck in Frameworks */,
 				B0874AD328002AD8007A2C4A /* FirebaseAuth in Frameworks */,
 				B0874AD728002AD8007A2C4A /* FirebaseFirestore in Frameworks */,
+				B0C39D82280D3EA700768C49 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +84,7 @@
 			children = (
 				B0081E40280006FA008BFBA4 /* QrProject */,
 				B0081E3F280006FA008BFBA4 /* Products */,
+				B0C39D80280D3EA700768C49 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,6 +134,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		B0C39D80280D3EA700768C49 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B0D1BE68280549B700922760 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +172,7 @@
 				B0874AD228002AD8007A2C4A /* FirebaseAuth */,
 				B0874AD428002AD8007A2C4A /* FirebaseDatabase */,
 				B0874AD628002AD8007A2C4A /* FirebaseFirestore */,
+				B0C39D81280D3EA700768C49 /* FirebaseStorage */,
 			);
 			productName = QrProject;
 			productReference = B0081E3E280006FA008BFBA4 /* QrProject.app */;
@@ -310,6 +321,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "МЭК Обход";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -364,6 +376,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "МЭК Обход";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -495,6 +508,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B0874ACD28002AD8007A2C4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		B0C39D81280D3EA700768C49 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B0874ACD28002AD8007A2C4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

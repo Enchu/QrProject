@@ -62,7 +62,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Jns-Gy-bZ1" secondAttribute="trailing" constant="40" id="yim-Qz-Rs3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Мобильный обходчик" largeTitleDisplayMode="never" id="0Zp-NF-oo7"/>
+                    <navigationItem key="navigationItem" title="Мобильный обходчик" id="0Zp-NF-oo7"/>
                     <connections>
                         <outlet property="loginButton" destination="Wbf-5x-tuv" id="1go-QF-nfv"/>
                         <outlet property="signUpButton" destination="JZp-Eq-IqL" id="pAb-MB-9bx"/>
@@ -246,8 +246,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a09-pQ-mex">
-                                <rect key="frame" x="151" y="428" width="112" height="40"/>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a09-pQ-mex">
+                                <rect key="frame" x="20" y="416" width="374" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="OOZ-zj-TU7"/>
                                 </constraints>
@@ -258,46 +258,92 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Jnm-bH-bYx">
-                                <rect key="frame" x="40" y="768" width="334" height="84"/>
+                                <rect key="frame" x="35" y="753" width="369" height="40"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Заметка" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjs-9X-sw7">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tzo-Lk-q6m">
-                                        <rect key="frame" x="0.0" y="34" width="334" height="50"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QwP-qv-H2S">
+                                        <rect key="frame" x="0.0" y="0.0" width="369" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZ0-cU-JRU">
+                                                <rect key="frame" x="0.0" y="0.0" width="184.5" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="GRb-uA-OUJ"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Добавить комментарий"/>
+                                                <connections>
+                                                    <action selector="addNotesTapped:" destination="cYS-tF-eKT" eventType="touchUpInside" id="Qjs-H4-XK6"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tzo-Lk-q6m">
+                                                <rect key="frame" x="184.5" y="0.0" width="184.5" height="40"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Назад"/>
+                                            </button>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="i2j-rg-vC9"/>
+                                            <constraint firstItem="yZ0-cU-JRU" firstAttribute="height" secondItem="Tzo-Lk-q6m" secondAttribute="height" id="KzY-Qx-Upq"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Назад"/>
-                                        <connections>
-                                            <action selector="backTapped:" destination="cYS-tF-eKT" eventType="touchUpInside" id="1Tb-yZ-bou"/>
-                                        </connections>
-                                    </button>
+                                    </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="QwP-qv-H2S" secondAttribute="trailing" constant="20" id="DXI-cH-3Wu"/>
+                                    <constraint firstAttribute="bottom" secondItem="QwP-qv-H2S" secondAttribute="bottom" constant="5" id="OCw-UF-2aM"/>
+                                    <constraint firstItem="QwP-qv-H2S" firstAttribute="leading" secondItem="Jnm-bH-bYx" secondAttribute="leading" constant="20" id="vEO-g5-DbX"/>
+                                </constraints>
                             </stackView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v40-wm-K30">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.47843137250000001" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.20000000000000001" green="0.47843137250000001" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Сканер" id="t86-To-9NI">
+                                        <barButtonItem key="leftBarButtonItem" title="Назад" id="ybq-IF-Acf">
+                                            <connections>
+                                                <action selector="backTappedBar:" destination="cYS-tF-eKT" id="nuv-2n-HXK"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Загрузить фото" id="zuZ-vo-fAE">
+                                            <connections>
+                                                <action selector="addPhotoTapped:" destination="cYS-tF-eKT" id="dW6-tQ-cCc"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kb9-du-VmA">
+                                <rect key="frame" x="0.0" y="321" width="374" height="400"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="D9S-5h-xxI"/>
+                                    <constraint firstAttribute="width" constant="374" id="p2q-NP-IFp"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YVU-MZ-5tQ"/>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.47843137250000001" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="YVU-MZ-5tQ" firstAttribute="bottom" secondItem="Jnm-bH-bYx" secondAttribute="bottom" constant="10" id="AZF-rP-0K7"/>
-                            <constraint firstItem="a09-pQ-mex" firstAttribute="centerX" secondItem="Ah4-xi-xQp" secondAttribute="centerX" id="DmI-w8-JOv"/>
-                            <constraint firstItem="YVU-MZ-5tQ" firstAttribute="trailing" secondItem="Jnm-bH-bYx" secondAttribute="trailing" constant="40" id="HlN-81-fIZ"/>
-                            <constraint firstItem="a09-pQ-mex" firstAttribute="centerY" secondItem="Ah4-xi-xQp" secondAttribute="centerY" id="QV0-ex-AM5"/>
-                            <constraint firstItem="Jnm-bH-bYx" firstAttribute="leading" secondItem="YVU-MZ-5tQ" secondAttribute="leading" constant="40" id="rCC-Nd-o3Q"/>
+                            <constraint firstItem="Kb9-du-VmA" firstAttribute="leading" secondItem="YVU-MZ-5tQ" secondAttribute="leading" constant="20" id="7vJ-7R-aEQ"/>
+                            <constraint firstAttribute="bottom" secondItem="Kb9-du-VmA" secondAttribute="bottom" constant="20" id="9F8-0n-o2z"/>
+                            <constraint firstItem="Kb9-du-VmA" firstAttribute="centerY" secondItem="Ah4-xi-xQp" secondAttribute="centerY" id="CNp-q7-xYM"/>
+                            <constraint firstItem="YVU-MZ-5tQ" firstAttribute="trailing" secondItem="Kb9-du-VmA" secondAttribute="trailing" constant="20" id="QzB-dQ-OZV"/>
+                            <constraint firstItem="YVU-MZ-5tQ" firstAttribute="bottom" secondItem="Jnm-bH-bYx" secondAttribute="bottom" constant="20" id="ZGk-QP-l3p"/>
+                            <constraint firstItem="YVU-MZ-5tQ" firstAttribute="trailing" secondItem="Jnm-bH-bYx" secondAttribute="trailing" constant="10" id="h7q-p4-yqN"/>
+                            <constraint firstItem="Jnm-bH-bYx" firstAttribute="leading" secondItem="YVU-MZ-5tQ" secondAttribute="leading" constant="35" id="hGK-SQ-DpH"/>
+                            <constraint firstItem="Kb9-du-VmA" firstAttribute="top" secondItem="a09-pQ-mex" secondAttribute="bottom" constant="20" id="hxV-TA-NsY"/>
+                            <constraint firstItem="Kb9-du-VmA" firstAttribute="centerX" secondItem="Ah4-xi-xQp" secondAttribute="centerX" id="jBt-ZB-4ef"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="backButton" destination="Tzo-Lk-q6m" id="9uJ-QL-08G"/>
-                        <outlet property="notesTextField" destination="tjs-9X-sw7" id="X0I-bi-Y2u"/>
+                        <outlet property="addNotesButton" destination="yZ0-cU-JRU" id="Dff-eY-dWb"/>
+                        <outlet property="cameraView" destination="Kb9-du-VmA" id="Y1i-17-MMH"/>
                         <outlet property="qrButton" destination="a09-pQ-mex" id="O03-du-H3F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zlw-GD-kVb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2426" y="68"/>
+            <point key="canvasLocation" x="2424.6376811594205" y="67.633928571428569"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oam-5P-fgp">

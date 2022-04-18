@@ -26,6 +26,7 @@ class LoginViewController: UIViewController {
         setUpElements()
     }
  
+    
     func setUpElements(){
         errorLabel.alpha = 0
         

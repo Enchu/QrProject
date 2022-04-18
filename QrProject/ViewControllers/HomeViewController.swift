@@ -12,22 +12,92 @@ import FirebaseAuth
 import FirebaseFirestore
 import SwiftUI
 
-class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
-
+class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate  {
+    
     var video = AVCaptureVideoPreviewLayer()
     //1. Настроим сессию
     let session = AVCaptureSession()
     
-    @IBOutlet weak var notesTextField: UITextField!
+    @IBOutlet weak var cameraView: UIView!
+    @IBOutlet weak var addNotesButton: UIButton!
     @IBOutlet weak var qrButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Utilities.styleFiledButton(qrButton)
-        Utilities.styleFiledButton(backButton)
-        Utilities.styleTextField(notesTextField)
+        setUpElements()
+        startVideo()
     }
+    
+    func startVideo(){
+        setupVideo()
+        view.layer.addSublayer(video)
+        session.startRunning()
+    }
+    
+    private func setUpElements(){
+        Utilities.styleFiledButton(qrButton)
+        Utilities.styleFiledButton(addNotesButton)
+        //Hide keyboard
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+    }
+    
+    @objc private func hideKeyboard(){
+        self.view.endEditing(true)
+    }
+    
+    @IBAction func addNotesTapped(_ sender: Any) {
+        alert("Добавить")
+    }
+    
+    var addNotes = ""
+    
+    func alert (_ message:String){//complitionHandler:@escaping(String)->Void
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: UIAlertController.Style.alert)
+        let alertOK = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        {(action) in
+            let tfText = alert.textFields?.first
+            guard let text = tfText?.text else { return}
+            self.addNotes = text
+            print(text)
+            print(self.addNotes)
+        }
+        alert.addTextField{ (tf) in tf.placeholder = "Комментарий"}
+        
+        alert.addAction(alertOK)
+        alert.addAction(UIAlertAction(title: "Отмена", style: .default))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    
+
+    @IBAction func addPhotoTapped(_ sender: Any) {
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        //picker.delegate = self
+        picker.allowsEditing = true
+        present(picker,animated: true)
+    }
+    
+    /*,UIImagePickerControllerDelegate, UINavigationControllerDelegate
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true,completion: nil)
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else{
+            return
+        }
+        guard let imageData = image.pngData() else{
+            return
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        <#code#>
+    }
+    */
+    
+    @objc private func keyboardWillHide(){
+        self.view.frame.origin.y = 0
+    }
+    
     
     func setupVideo(){
         
@@ -40,6 +110,7 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
             session.addInput(input)
         }
         catch{
+            print(error)
             fatalError(error.localizedDescription)
         }
         //4.Настроим output
@@ -51,14 +122,12 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         
         //5
         video = AVCaptureVideoPreviewLayer(session: session)
-        video.frame = view.layer.bounds
+        video.frame = view.layer.bounds // Менять тут
+        //video.frame.size = cameraView.frame.size
+        //video.videoGravity = AVLayerVideoGravity.resizeAspectFill
     }
     
-    func startRunning(){
-        setupVideo()
-        view.layer.addSublayer(video)
-        session.startRunning()
-    }
+    
     
     
     var uidLL = ""
@@ -72,28 +141,27 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         dateFormatter.locale = Locale(identifier: "ru_Ru")
         let currentDateTime = dateFormatter.string(from: dateString)
         
-        let notes = notesTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        var notes = addNotes
+        
         
         let db = Firestore.firestore()
         db.collection("qf").addDocument(data: ["datetime":currentDateTime,"name":message,"uid":self.uidLL,"notes":notes ])
                 {(error) in
                     if error != nil{
                         print((error?.localizedDescription)!)
+                        //notesTextField.text = ""
                         //self.alert("Данные не могут сохраниться")
                     }
                 }
+        self.addNotes = ""
             }
 
-    func alert (_ message:String){
-        let alert = UIAlertController(title: message, message: self.uidLL, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
+    
     
     @IBAction func qrTapped(_ sender: Any) {
-        startRunning()
+        //setupVideo()
     }
-    @IBAction func backTapped(_ sender: Any) {
+    @IBAction func backTappedBar(_ sender: Any) {
         self.loginToHome()
     }
     func loginToHome(){
@@ -114,7 +182,6 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
                 }))
                 present(alert, animated: true, completion: {
                     self.addBase(object.stringValue!)
-                    self.backButton.alpha = 1
                 })
             }
         }

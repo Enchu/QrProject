@@ -64,7 +64,8 @@ class ViewModel: ObservableObject{
                 let name = i.get("name") as! String
                 let uid = i.get("uid") as! String
                 let notes = i.get("notes") as! String
-                self.list.append(QFData(id: id, name: name, datetime: datetime, uid: uid,notes: notes))
+                let photo = i.get("photo") as! String
+                self.list.append(QFData(id: id, name: name, datetime: datetime, uid: uid,notes: notes,photo: photo))
         }
     }
     }
@@ -83,7 +84,9 @@ class ViewModel: ObservableObject{
                             return QFData(id: d.documentID, name: d["name"] as? String ?? "",
                                           datetime: d["datetime"] as? String ?? "",
                                           uid: d["uid"] as? String ?? "",
-                                          notes:d["notes"] as? String ?? "")
+                                          notes:d["notes"] as? String ?? "",
+                                        photo:d["photo"] as? String ?? "")
+                                            
                         }
                     }
                     

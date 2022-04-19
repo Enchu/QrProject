@@ -18,6 +18,7 @@ struct ContentView: View {
     @State var name = ""
     @State var uid = ""
     @State var notes = ""
+    @State var photo = ""
     
     @State var txt = ""
 
@@ -60,7 +61,7 @@ struct ContentView: View {
         NavigationView(){
             ZStack(alignment: .top){
             VStack(spacing: 0){
-        List(model.list){ item in
+                List(model.list){ item in
             HStack{
                 if(item.notes == ""){
                     Text(item.datetime).background().colorMultiply(.green)
@@ -87,10 +88,7 @@ struct ContentView: View {
                 .buttonStyle(BorderedButtonStyle())
             }
         }
-                //Spacer()
-                
                 Divider()
-                
                 VStack(spacing: 10){
                     NavigationLink("Поиск",destination: SearchTable()).padding()
                 }
@@ -99,7 +97,7 @@ struct ContentView: View {
             }.padding()*/
         }
             }
-        }//.navigationTitle("").navigationBarHidden(true)
+        }.navigationTitle("").navigationBarHidden(true)
         
         
         //Back to Login Page
@@ -167,7 +165,7 @@ struct SearchTable:View{
                     }
                 }
             }
-        }
+        }.navigationTitle("")
     }
     init() {
         model.getData()
@@ -181,11 +179,19 @@ struct Detail: View{
     @State var name = ""
     @State var uid = ""
     @State var notes = ""
+    @State var photo = ""
     
     var body: some View{
         Text(data.name)
         Text(data.datetime)
         //Text(data.uid)
         Text(data.notes)
+        if data.notes != ""{
+            Text(data.photo).onTapGesture {
+                let url = URL(string: data.photo)
+                UIApplication.shared.open(url!)
+                //print("1\(data.photo)")
+            }.foregroundColor(.blue)
+        }
     }
 }

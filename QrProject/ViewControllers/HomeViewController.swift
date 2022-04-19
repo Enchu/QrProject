@@ -11,20 +11,33 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import SwiftUI
+import FirebaseStorage
+import Photos
 
-class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate  {
+
+
+class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
     var video = AVCaptureVideoPreviewLayer()
     //1. Настроим сессию
     let session = AVCaptureSession()
     
-    @IBOutlet weak var cameraView: UIView!
+    private let storageGlobal = Storage.storage().reference()
+    var imagePickerController = UIImagePickerController()
+    var globalURL = ""
+    var globalImage = UIImage()
+    var globalPhoto = Data()
+    
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var addNotesButton: UIButton!
     @IBOutlet weak var qrButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpElements()
+        imagePickerController.delegate = self
+        //imageView.alpha = 0
+        imageView.contentMode = .scaleAspectFit
         startVideo()
     }
     
@@ -68,17 +81,31 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         self.present(alert, animated: true, completion: nil)
     }
 
-    
+    func addDataPhoto(){
+        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
+                let url = URL(string: urlString) else{
+            return
+        }
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else{
+                return
+            }
+            
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                self.imageView.image = image
+            }
+        }
+        task.resume()
+    }
 
     @IBAction func addPhotoTapped(_ sender: Any) {
-        let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
-        //picker.delegate = self
-        picker.allowsEditing = true
-        present(picker,animated: true)
+        self.imagePickerController.sourceType = .photoLibrary
+        self.imagePickerController.allowsEditing = true
+        self.present(self.imagePickerController,animated: true,completion: nil)
     }
     
-    /*,UIImagePickerControllerDelegate, UINavigationControllerDelegate
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true,completion: nil)
         guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else{
@@ -87,12 +114,29 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         guard let imageData = image.pngData() else{
             return
         }
+        self.globalPhoto = (imageData as? Data)!
+        storageGlobal.child("images/file.png").putData(imageData,metadata: nil,completion: {_,error in
+            guard error == nil else{
+                print("Failed to upload")
+                return
+            }
+            self.storageGlobal.child("images/file.png").downloadURL(completion: {url,error in
+                guard let url = url,error == nil else {
+                    return
+                }
+                self.globalURL = url.absoluteString//Global URL To add Data
+                let urlString  = url.absoluteString
+                print("Dowload URL:\(urlString)")
+                UserDefaults.standard.set(urlString, forKey: "url")
+                self.addDataPhoto()
+            })
+        })
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        <#code#>
+        picker.dismiss(animated: true,completion: nil)
     }
-    */
+    
     
     @objc private func keyboardWillHide(){
         self.view.frame.origin.y = 0
@@ -126,10 +170,7 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         //video.frame.size = cameraView.frame.size
         //video.videoGravity = AVLayerVideoGravity.resizeAspectFill
     }
-    
-    
-    
-    
+
     var uidLL = ""
     
     func addBase(_ message:String){
@@ -140,27 +181,37 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         dateFormatter.timeStyle = .short
         dateFormatter.locale = Locale(identifier: "ru_Ru")
         let currentDateTime = dateFormatter.string(from: dateString)
-        
-        var notes = addNotes
-        
-        
+
+        let notes = addNotes
         let db = Firestore.firestore()
-        db.collection("qf").addDocument(data: ["datetime":currentDateTime,"name":message,"uid":self.uidLL,"notes":notes ])
-                {(error) in
-                    if error != nil{
-                        print((error?.localizedDescription)!)
-                        //notesTextField.text = ""
-                        //self.alert("Данные не могут сохраниться")
+        if globalURL != ""{
+            db.collection("qf").addDocument(data: ["datetime":currentDateTime,"name":message,"uid":self.uidLL,"notes":notes,"photo":globalURL ])
+                    {(error) in
+                        if error != nil{
+                            print((error?.localizedDescription)!)
+                        }
                     }
-                }
+        }
+        else{
+            db.collection("qf").addDocument(data: ["datetime":currentDateTime,"name":message,"uid":self.uidLL,"notes":notes ])
+                    {(error) in
+                        if error != nil{
+                            print((error?.localizedDescription)!)
+                        }
+                    }
+        }
+        
         self.addNotes = ""
-            }
+        self.globalURL = ""
+        
+            }//End
 
     
     
     @IBAction func qrTapped(_ sender: Any) {
         //setupVideo()
     }
+    
     @IBAction func backTappedBar(_ sender: Any) {
         self.loginToHome()
     }

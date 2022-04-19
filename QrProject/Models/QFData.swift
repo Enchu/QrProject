@@ -14,4 +14,5 @@ struct QFData: Identifiable{
     var datetime: String
     var uid: String
     var notes:String
+    var photo:String
 }

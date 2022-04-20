@@ -99,6 +99,7 @@
 		B0081E40280006FA008BFBA4 /* QrProject */ = {
 			isa = PBXGroup;
 			children = (
+				B0A61748280FD68B0013B0D8 /* Resources */,
 				B00A3614280551C10016BD6E /* ViewModel */,
 				B0D1BE68280549B700922760 /* Models */,
 				B006410C280011D600143E4B /* Helpers */,
@@ -132,6 +133,13 @@
 				B0D1BE6B28054AC700922760 /* ViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B0A61748280FD68B0013B0D8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		B0C39D80280D3EA700768C49 /* Frameworks */ = {

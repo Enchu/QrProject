@@ -14,14 +14,32 @@ class Utilities{
         let bottomLine = CALayer()
         
         bottomLine.frame = CGRect(x:0,y: textField.frame.height - 2, width:textField.frame.width,height: 2)
-        
         //bottomLine.backgroundColor = UIColor.init(red:48/255,green: 173/255,blue: 88/255,alpha: 1).cgColor
         bottomLine.backgroundColor = UIColor.init(red:253/255,green: 23/255,blue: 101/255,alpha: 1).cgColor
-        
         textField.borderStyle = .none
-        
+        textField.leftViewMode = .always
+        textField.clearButtonMode = .always
+        textField.returnKeyType = .done
+        textField.font = UIFont(name: "Apple SD Gothic Neo", size: 20)
+        textField.textColor = #colorLiteral(red: 0.2789022923, green: 0.2789022923, blue: 0.2789022923, alpha: 1)
+        textField.tintColor = #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1)
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.addSublayer(bottomLine)
     }
+    
+    static func styleLabel(_ label:UILabel){
+        label.font = UIFont(name: "Apple SD Gothic Neo", size: 16)
+        label.adjustsFontSizeToFitWidth = true
+        //#colorLiteral (
+        label.textColor = #colorLiteral(red: 0.9564198852, green: 0.9451850057, blue: 0.8892086744, alpha: 1)
+        label.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    static func styleColorTextField(_ textField:UITextField){
+        let bottomLine = CALayer()
+        bottomLine.backgroundColor = UIColor.init(red: 0/255, green: 100/255, blue: 0/255, alpha: 1).cgColor
+    }
+    
     static func styleFiledButton(_ button:UIButton){
         //button.backgroundColor = UIColor.init(red: 51/255, green: 122/255, blue: 183/255, alpha:1)
         button.backgroundColor = UIColor.init(red: 0/255, green: 37/255, blue: 89/255, alpha:1)

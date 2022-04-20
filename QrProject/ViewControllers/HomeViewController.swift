@@ -114,7 +114,7 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         guard let imageData = image.pngData() else{
             return
         }
-        self.globalPhoto = (imageData as? Data)!
+        //self.globalPhoto = (imageData as? Data)!
         storageGlobal.child("images/file.png").putData(imageData,metadata: nil,completion: {_,error in
             guard error == nil else{
                 print("Failed to upload")

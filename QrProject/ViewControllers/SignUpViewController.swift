@@ -17,24 +17,39 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var errorEmailLabel: UILabel!
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         setUpElements()
+        
+        setupViews()
+        setDelegetes()
+        setContaints()
     }
     
     func setUpElements(){
         errorLabel.alpha = 0
+        errorEmailLabel.alpha = 0
         Utilities.styleTextField(firstNameTextField)
         Utilities.styleTextField(lastNameTextField)
         Utilities.styleTextField(emailTextField)
         Utilities.styleTextField(passwordTextField)
         Utilities.styleFiledButton(signUpButton)
+        Utilities.styleLabel(errorEmailLabel)
     }
 
+    private func setupViews(){
+        
+    }
+    
+    private func setDelegetes(){
+        
+    }
+    
     func validateFields() -> String?{
         
         if firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
@@ -52,9 +67,6 @@ class SignUpViewController: UIViewController {
         
         return nil
     }
-    
-        
-    
     
     @IBAction func signUpTapped(_ sender: Any) {
         
@@ -92,12 +104,8 @@ class SignUpViewController: UIViewController {
                       }
                     }
                     self.transitionToLogin()
-                    //self.transitionToHome()
-                    
                }//End Else Auth
             }//End Auth
-            
-            
         }//End Else
         
     }//End sign Up tapped
@@ -119,4 +127,10 @@ class SignUpViewController: UIViewController {
         errorLabel.alpha = 1
     }
     
+}//End Class ViewController
+
+extension SignUpViewController{
+    private func setContaints(){
+        
+    }
 }

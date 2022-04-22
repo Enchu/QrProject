@@ -34,17 +34,35 @@ class LoginViewController: UIViewController {
         Utilities.styleTextField(passwordTextField)
         Utilities.styleFiledButton(loginButton)
     }
-
+    @IBAction func loginChanged(_ sender: UITextField) {
+        let CleanedEmail = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        if Utilities.isValidEmail(CleanedEmail) == false{ return }
+        if sender.text!.count > 6{
+            Utilities.styleColorTextField(emailTextField)
+        }
+        if sender.text!.count < 6{
+            Utilities.styleTextField(emailTextField)
+        }
+    }
+    @IBAction func passwordChanged(_ sender: UITextField) {
+        let CleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        if Utilities.isPasswordValid(CleanedPassword) == false{
+            return
+        }
+        if sender.text!.count > 6{
+            Utilities.styleColorTextField(passwordTextField)
+        }
+        if sender.text!.count < 6{
+            Utilities.styleTextField(passwordTextField)
+        }
+    }
+    
     @IBAction func loginTapped(_ sender: Any) {
-        
         let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if email == "admin" && password == "admin"{
-            self.adminToHome()
-        }
+        if email == "admin" && password == "admin"{ self.adminToHome() }
         else{
-        
         Auth.auth().signIn(withEmail: email, password: password){(result,error) in
             if error != nil{
                 self.errorLabel.text = error!.localizedDescription

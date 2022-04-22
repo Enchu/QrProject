@@ -23,8 +23,8 @@
 /* Class = "UITextField"; placeholder = "Пароль"; ObjectID = "HM6-jQ-Mja"; */
 "HM6-jQ-Mja.placeholder" = "Пароль";
 
-/* Class = "UITextField"; placeholder = "Фамилие"; ObjectID = "HdO-Zy-g77"; */
-"HdO-Zy-g77.placeholder" = "Фамилие";
+/* Class = "UITextField"; placeholder = "Фамилия"; ObjectID = "HdO-Zy-g77"; */
+"HdO-Zy-g77.placeholder" = "Фамилия";
 
 /* Class = "UIButton"; configuration.title = "Зарегистрироваться"; ObjectID = "J4r-S3-xkZ"; */
 "J4r-S3-xkZ.configuration.title" = "Зарегистрироваться";

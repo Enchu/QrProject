@@ -81,19 +81,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZZN-p1-ixd">
-                                <rect key="frame" x="40" y="128" width="334" height="230.5"/>
+                                <rect key="frame" x="40" y="128" width="334" height="290"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Логин" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dlv-dS-0oo">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="loginChanged:" destination="81F-Y0-CHA" eventType="editingChanged" id="BXp-y1-gwi"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HM6-jQ-Mja">
                                         <rect key="frame" x="0.0" y="70" width="334" height="50"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="passwordChanged:" destination="81F-Y0-CHA" eventType="editingChanged" id="CYl-om-x7X"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66s-JM-uwe">
                                         <rect key="frame" x="0.0" y="140" width="334" height="50"/>
@@ -107,7 +113,10 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKO-jh-aqx">
-                                        <rect key="frame" x="0.0" y="210" width="334" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="210" width="334" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="gAC-tm-9sZ"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
@@ -166,37 +175,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="HfA-Hy-1QP">
-                                <rect key="frame" x="40" y="128" width="334" height="410"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="HfA-Hy-1QP">
+                                <rect key="frame" x="40" y="128" width="334" height="450"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Имя" textAlignment="natural" minimumFontSize="17" background="first" translatesAutoresizingMaskIntoConstraints="NO" id="ZEc-hI-AnB">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="firstNameChanged:" destination="gJi-ma-P5X" eventType="editingChanged" id="rNP-ht-ppe"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Фамилия" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HdO-Zy-g77">
-                                        <rect key="frame" x="0.0" y="70" width="334" height="50"/>
+                                        <rect key="frame" x="0.0" y="74" width="334" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="lastNameChanged:" destination="gJi-ma-P5X" eventType="editingChanged" id="xeP-VL-8II"/>
+                                        </connections>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="errorEmailLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FI3-fD-f3H">
-                                        <rect key="frame" x="0.0" y="140" width="334" height="19.5"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Логин" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RiL-6h-GNf">
-                                        <rect key="frame" x="0.0" y="179.5" width="334" height="50"/>
+                                        <rect key="frame" x="0.0" y="148" width="334" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="loginChanged:" destination="gJi-ma-P5X" eventType="editingChanged" id="hN7-U4-BZT"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9ev-2j-QCv">
-                                        <rect key="frame" x="0.0" y="249.5" width="334" height="50"/>
+                                        <rect key="frame" x="0.0" y="222" width="334" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="passwordChanged:" destination="gJi-ma-P5X" eventType="editingChanged" id="1kY-f4-wa9"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4r-S3-xkZ">
-                                        <rect key="frame" x="0.0" y="319.5" width="334" height="50"/>
+                                        <rect key="frame" x="0.0" y="296" width="334" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="x0g-cM-apW"/>
                                         </constraints>
@@ -206,8 +221,11 @@
                                             <action selector="signUpTapped:" destination="gJi-ma-P5X" eventType="touchUpInside" id="4dT-ak-YFs"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jw-Vq-mXA">
-                                        <rect key="frame" x="0.0" y="389.5" width="334" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="2jw-Vq-mXA">
+                                        <rect key="frame" x="0.0" y="370" width="334" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="0Bf-bJ-J2F"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
@@ -233,7 +251,6 @@
                     <navigationItem key="navigationItem" title="Регистрация" id="yQ1-P2-uNi"/>
                     <connections>
                         <outlet property="emailTextField" destination="RiL-6h-GNf" id="TBb-36-7GT"/>
-                        <outlet property="errorEmailLabel" destination="FI3-fD-f3H" id="7N4-t9-QUN"/>
                         <outlet property="errorLabel" destination="2jw-Vq-mXA" id="TSr-3Q-CGk"/>
                         <outlet property="firstNameTextField" destination="ZEc-hI-AnB" id="Iqj-3p-UD0"/>
                         <outlet property="lastNameTextField" destination="HdO-Zy-g77" id="cj9-41-cB9"/>
@@ -243,7 +260,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LWN-pK-kjQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1629" y="-293"/>
+            <point key="canvasLocation" x="1628.985507246377" y="-293.30357142857139"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="RjV-oO-c49">

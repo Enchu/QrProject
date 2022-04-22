@@ -24,39 +24,6 @@ struct ContentView: View {
 
     var body: some View {
         
-        //search
-        /*NavigationView(){
-            ZStack(alignment: .top){
-                VStack (spacing: 0){
-                    HStack(){
-                        TextField("Поиск", text: self.$txt).textFieldStyle(RoundedBorderTextFieldStyle())
-                        if self.txt != ""{
-                            Button(action: {
-                                self.txt = ""
-                            }, label: {Text("Закрыть")}).foregroundColor(.black)
-                        }
-                    }.padding()
-                    
-                    if self.txt != ""{
-                        if self.model.list.filter({$0.datetime.lowercased().contains(self.txt.lowercased())}).count == 0
-                        {
-                            Text("Нет результата").padding().foregroundColor(Color.black.opacity(0.5)).padding()
-                        }
-                        else{
-                            List(self.model.list.filter{$0.datetime.lowercased().contains(self.txt.lowercased())})
-                            {i in
-                                NavigationLink(destination: Detail(data: i)){
-                                Text(i.name)
-                                Text(i.datetime)
-                                }
-                            }.frame(height: UIScreen.main.bounds.height / 5)
-                        }
-                    }
-                }
-        }
-        }.navigationTitle("").navigationBarHidden(true)*/
-        
-        
         //Update and Delete
         NavigationView(){
             ZStack(alignment: .top){
@@ -97,7 +64,7 @@ struct ContentView: View {
             }.padding()*/
         }
             }
-        }.navigationTitle("").navigationBarHidden(true)
+        }.navigationTitle("").navigationViewStyle(StackNavigationViewStyle())
         
         
         //Back to Login Page
@@ -132,7 +99,6 @@ struct SearchTable:View{
     @State var name = ""
     @State var uid = ""
     @State var notes = ""
-    
     @State var txt = ""
     
     var body: some View{
@@ -165,7 +131,7 @@ struct SearchTable:View{
                     }
                 }
             }
-        }.navigationTitle("")
+        }.navigationTitle("").navigationViewStyle(StackNavigationViewStyle())
     }
     init() {
         model.getData()

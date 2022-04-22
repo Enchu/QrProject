@@ -17,7 +17,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var errorEmailLabel: UILabel!
     
     
     
@@ -25,30 +24,63 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
 
         setUpElements()
-        
-        setupViews()
-        setDelegetes()
-        setContaints()
+    }
+
+    @objc private func hideKeyboard(){
+        self.view.endEditing(true)
     }
     
     func setUpElements(){
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
         errorLabel.alpha = 0
-        errorEmailLabel.alpha = 0
         Utilities.styleTextField(firstNameTextField)
         Utilities.styleTextField(lastNameTextField)
         Utilities.styleTextField(emailTextField)
         Utilities.styleTextField(passwordTextField)
         Utilities.styleFiledButton(signUpButton)
-        Utilities.styleLabel(errorEmailLabel)
-    }
-
-    private func setupViews(){
-        
+        Utilities.styleLabel(errorLabel)
     }
     
-    private func setDelegetes(){
-        
+    @IBAction func firstNameChanged(_ sender: UITextField) {
+        //if Utilities.isCurrentSize(sender.text!) == false{ return}
+        if sender.text!.count > 2{
+            Utilities.styleColorTextField(firstNameTextField)
+        }
+        if sender.text!.count<2{
+            Utilities.styleTextField(firstNameTextField)
+        }
     }
+    @IBAction func lastNameChanged(_ sender: UITextField) {
+        if sender.text!.count > 2{
+            Utilities.styleColorTextField(lastNameTextField)
+        }
+        if sender.text!.count < 2{
+            Utilities.styleTextField(lastNameTextField)
+        }
+    }
+    @IBAction func loginChanged(_ sender: UITextField) {
+        let CleanedEmail = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        if Utilities.isValidEmail(CleanedEmail) == false{ return }
+        if sender.text!.count > 6{
+            Utilities.styleColorTextField(emailTextField)
+        }
+        if sender.text!.count < 6{
+            Utilities.styleTextField(emailTextField)
+        }
+    }
+    @IBAction func passwordChanged(_ sender: UITextField) {
+        let CleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        if Utilities.isPasswordValid(CleanedPassword) == false{
+            return
+        }
+        if sender.text!.count > 6{
+            Utilities.styleColorTextField(passwordTextField)
+        }
+        if sender.text!.count < 6{
+            Utilities.styleTextField(passwordTextField)
+        }
+    }
+    
     
     func validateFields() -> String?{
         
@@ -60,7 +92,11 @@ class SignUpViewController: UIViewController {
             return "Заполните все поля"
         }
         
+        let CleanedEmail = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let CleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        if Utilities.isValidEmail(CleanedEmail) == false{
+            return "Пожалуйста, убежитесь, в правильности написания email"
+        }
         if Utilities.isPasswordValid(CleanedPassword) == false{
             return "Пожалуйста, убедитесь, что ваш пароль состоит не менее чем из 6 символов,содержащий специальный символ и число"
         }
@@ -81,7 +117,7 @@ class SignUpViewController: UIViewController {
         let error = validateFields()
         if error != nil{
             showError(error!)
-        }//IF error
+        }
         else{
            
             let firstname = firstNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -129,8 +165,4 @@ class SignUpViewController: UIViewController {
     
 }//End Class ViewController
 
-extension SignUpViewController{
-    private func setContaints(){
-        
-    }
-}
+

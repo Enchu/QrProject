@@ -105,6 +105,16 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         self.present(self.imagePickerController,animated: true,completion: nil)
     }
     
+    var maxRes = 1
+    func listAllPhoto(){
+        let storageReference = storageGlobal.child("images/")
+        storageReference.list(maxResults: Int64(maxRes)) { (result, error) in
+            if let error = error {
+              print("No way")
+            }
+            print(self.maxRes)
+        }
+    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true,completion: nil)
@@ -114,13 +124,14 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         guard let imageData = image.pngData() else{
             return
         }
-        //self.globalPhoto = (imageData as? Data)!
-        storageGlobal.child("images/file.png").putData(imageData,metadata: nil,completion: {_,error in
+        listAllPhoto()
+        self.maxRes = maxRes + 1
+        storageGlobal.child("images/file\(maxRes).png").putData(imageData,metadata: nil,completion: { [self]_,error in
             guard error == nil else{
                 print("Failed to upload")
                 return
             }
-            self.storageGlobal.child("images/file.png").downloadURL(completion: {url,error in
+            self.storageGlobal.child("images/file\(maxRes).png").downloadURL(completion: {url,error in
                 guard let url = url,error == nil else {
                     return
                 }
@@ -144,7 +155,6 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
     
     
     func setupVideo(){
-        
         //2.Настроиваем устройство видео
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
         
@@ -160,10 +170,8 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         //4.Настроим output
         let output = AVCaptureMetadataOutput()
         session.addOutput(output)
-        
         output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
-        
         //5
         video = AVCaptureVideoPreviewLayer(session: session)
         video.frame = view.layer.bounds // Менять тут
@@ -186,7 +194,7 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         let db = Firestore.firestore()
         if globalURL != ""{
             db.collection("qf").addDocument(data: ["datetime":currentDateTime,"name":message,"uid":self.uidLL,"notes":notes,"photo":globalURL ])
-                    {(error) in
+            {(error) in
                         if error != nil{
                             print((error?.localizedDescription)!)
                         }
@@ -200,10 +208,8 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
                         }
                     }
         }
-        
         self.addNotes = ""
         self.globalURL = ""
-        
             }//End
 
     
@@ -220,7 +226,6 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         view.window?.rootViewController = loginViewController
         view.window?.makeKeyAndVisible()
     }
-
     
     //Работа после обнаружения QRcod
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
@@ -236,9 +241,7 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
                 })
             }
         }
-        
     }
   
-    
-    
+  
 }

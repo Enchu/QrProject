@@ -60,7 +60,7 @@ class SignUpViewController: UIViewController {
     }
     @IBAction func loginChanged(_ sender: UITextField) {
         let CleanedEmail = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        if Utilities.isValidEmail(CleanedEmail) == false{ return }
+        if Utilities.isValidEmail(CleanedEmail) == false{ return Utilities.styleTextField(emailTextField)}
         if sender.text!.count > 6{
             Utilities.styleColorTextField(emailTextField)
         }
@@ -69,11 +69,11 @@ class SignUpViewController: UIViewController {
         }
     }
     @IBAction func passwordChanged(_ sender: UITextField) {
-        let CleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        /*let CleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         if Utilities.isPasswordValid(CleanedPassword) == false{
-            return
-        }
-        if sender.text!.count > 6{
+            return Utilities.styleTextField(passwordTextField)
+        }*/
+        if sender.text!.count >= 6{
             Utilities.styleColorTextField(passwordTextField)
         }
         if sender.text!.count < 6{
@@ -81,6 +81,11 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    func alert (_ message:String){
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     func validateFields() -> String?{
         
@@ -98,7 +103,7 @@ class SignUpViewController: UIViewController {
             return "Пожалуйста, убежитесь, в правильности написания email"
         }
         if Utilities.isPasswordValid(CleanedPassword) == false{
-            return "Пожалуйста, убедитесь, что ваш пароль состоит не менее чем из 6 символов,содержащий специальный символ и число"
+            return "Пожалуйста, убедитесь, что ваш пароль состоит не менее чем из 6 символов"
         }
         
         return nil
@@ -116,7 +121,8 @@ class SignUpViewController: UIViewController {
         
         let error = validateFields()
         if error != nil{
-            showError(error!)
+            alert(error!)
+            //showError(error!)
         }
         else{
            

@@ -15,7 +15,7 @@ class AdminViewController: UIViewController {
         super.viewDidLoad()
         let chieldView = UIHostingController(rootView: ContentView())
         addChild(chieldView)
-        chieldView.view.frame = theContainer.bounds
+        chieldView.view.frame = theContainer.layer.bounds
         theContainer.addSubview(chieldView.view)
     }
 }

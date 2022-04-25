@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+import SwiftUI
 
 class Utilities{
      
@@ -28,6 +28,7 @@ class Utilities{
         textField.layer.addSublayer(bottomLine)
     }
     
+    
     static func styleLabel(_ label:UILabel){
         label.font = UIFont(name: "Apple SD Gothic Neo", size: 16)
         label.adjustsFontSizeToFitWidth = true
@@ -41,17 +42,8 @@ class Utilities{
     
     static func styleColorTextField(_ textField:UITextField){
         let bottomLine = CALayer()
-        textField.clearsContextBeforeDrawing = true
         bottomLine.frame = CGRect(x:0,y: textField.frame.height - 2, width:textField.frame.width,height: 2)
         bottomLine.backgroundColor = UIColor.init(red: 0/255, green: 100/255, blue: 0/255, alpha: 1).cgColor
-        textField.borderStyle = .none
-        textField.leftViewMode = .always
-        textField.clearButtonMode = .always
-        textField.returnKeyType = .done
-        textField.font = UIFont(name: "Apple SD Gothic Neo", size: 20)
-        textField.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        textField.tintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.addSublayer(bottomLine)
         //
     }
@@ -63,17 +55,6 @@ class Utilities{
         button.titleLabel?.font = UIFont(name: "Avenir Book", size: 17)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = UIColor.white
-    }
-    
-    static func styleIsChekedEmail(_ button:UIButton){
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .none
-    }
-    
-    static func mailCollectionViewCell(_ label:UILabel){
-        label.backgroundColor = .white
-        label.alpha = 0.5
-        label.layer.cornerRadius = 10
     }
     
     static func styleHollowButton(_ button:UIButton){
@@ -96,7 +77,8 @@ class Utilities{
     }
     
     static func isPasswordValid(_ password:String)->Bool{
-        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{6,}")
+        //let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{6,}")
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^{6,}")
         return passwordTest.evaluate(with: password)
     }
 }

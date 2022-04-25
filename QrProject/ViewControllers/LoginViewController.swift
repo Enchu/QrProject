@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
     @IBAction func loginChanged(_ sender: UITextField) {
         let CleanedEmail = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         if Utilities.isValidEmail(CleanedEmail) == false{ return }
-        if sender.text!.count > 6{
+        if sender.text!.count >= 6{
             Utilities.styleColorTextField(emailTextField)
         }
         if sender.text!.count < 6{
@@ -45,10 +45,6 @@ class LoginViewController: UIViewController {
         }
     }
     @IBAction func passwordChanged(_ sender: UITextField) {
-        let CleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        if Utilities.isPasswordValid(CleanedPassword) == false{
-            return
-        }
         if sender.text!.count > 6{
             Utilities.styleColorTextField(passwordTextField)
         }
@@ -57,7 +53,14 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func alert (_ message:String){
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func loginTapped(_ sender: Any) {
+        
         let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
@@ -65,8 +68,8 @@ class LoginViewController: UIViewController {
         else{
         Auth.auth().signIn(withEmail: email, password: password){(result,error) in
             if error != nil{
-                self.errorLabel.text = error!.localizedDescription
-                self.errorLabel.alpha = 1
+                //self.errorLabel.text = error!.localizedDescription self.errorLabel.alpha = 1
+                self.alert("Ошибка подключения/ Логин или пароль неверен")
             }
             else{
                 let Res = result?.user.uid
@@ -75,7 +78,6 @@ class LoginViewController: UIViewController {
             }
         }
         }
-        
     }
     
     func adminToHome(){

@@ -26,17 +26,27 @@ struct ContentView: View {
         
         //Update and Delete
         NavigationView(){
+            
             ZStack(alignment: .top){
+                GeometryReader{_ in
+                }.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
+                
             VStack(spacing: 0){
                 List(model.list){ item in
             HStack{
+                var Probel = " "
                 if(item.notes == ""){
-                    Text(item.datetime).background().colorMultiply(.green)
-                    Text(item.name).background().colorMultiply(.green)
+                    Group{
+                        Text(item.datetime + Probel + item.name)
+                    }.background(Color.green)
+                        .font(.system(size: 20))//name: "Apple SD Gothic Neo", size: 20
                 }
                 else{
-                    Text(item.datetime).background().colorMultiply(.red)
-                    Text(item.name).background().colorMultiply(.red)}
+                    Group{
+                        Text(item.datetime + Probel + item.name)
+                    }.background(Color.red)
+                        .font(.system(size: 20))
+                }
                 Spacer()
                 //Updata data
                 /*Button(action: {
@@ -54,30 +64,20 @@ struct ContentView: View {
                 })
                 .buttonStyle(BorderedButtonStyle())
             }
-        }
+                }.background().colorMultiply(Color("BlueRGB"))
+                    .foregroundColor(.black)
+                //End List
                 Divider()
                 VStack(spacing: 10){
-                    NavigationLink("Поиск",destination: SearchTable()).padding()
+                    NavigationLink("Поиск",destination: SearchTable())
                 }
-            /*NavigationLink(){ SearchTable() }
-            label: { Text("Поиск") }
-            }.padding()*/
         }
-            }
-        }.navigationTitle("").navigationViewStyle(StackNavigationViewStyle())
-        
-        
-        //Back to Login Page
-        /*VStack(spacing:5){
-            Button(action: {
-                
-            }, label: {
-                Text("Back")
-            })
-            .buttonStyle(BorderedButtonStyle())
-        }.padding()*/
+            }.navigationTitle("")
+                .navigationBarHidden(true)
+                .navigationViewStyle(StackNavigationViewStyle())
+        }
     } //End View
-    
+
     init() {
         model.getData()
     }
@@ -104,34 +104,45 @@ struct SearchTable:View{
     var body: some View{
         NavigationView(){
             ZStack(alignment: .top){
+                GeometryReader{_ in
+                    //Text("Home")
+                }.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
+                
                 VStack (spacing: 0){
                     HStack(){
                         TextField("Поиск", text: self.$txt).textFieldStyle(RoundedBorderTextFieldStyle())
                         if self.txt != ""{
                             Button(action: {
                                 self.txt = ""
-                            }, label: {Text("Закрыть")}).foregroundColor(.black)
+                            })
+                            {
+                                Text("Закрыть")
+                            }.foregroundColor(.black)
                         }
                     }.padding()
                     
                     if self.txt != ""{
                         if self.model.list.filter({$0.datetime.lowercased().contains(self.txt.lowercased())}).count == 0
                         {
-                            Text("Нет результата").padding().foregroundColor(Color.black.opacity(0.5)).padding()
+                            Text("Нет результата").foregroundColor(Color.black.opacity(0.5)).padding()
                         }
                         else{
-                            List(self.model.list.filter{$0.datetime.lowercased().contains(self.txt.lowercased())})
+                            List(self.model.list.filter{$0.datetime.lowercased().contains(self.txt.lowercased())}
+                            )
                             {i in
                                 NavigationLink(destination: Detail(data: i)){
                                 Text(i.name)
                                 Text(i.datetime)
                                 }
-                            }
+                            }.background().colorMultiply(Color("BlueRGB"))
+                                .foregroundColor(.black)
                         }
                     }
-                }
-            }
-        }.navigationTitle("").navigationViewStyle(StackNavigationViewStyle())
+                }//.padding()
+            }.navigationTitle("")
+                .navigationBarHidden(true)
+                .navigationViewStyle(StackNavigationViewStyle())
+        }
     }
     init() {
         model.getData()
@@ -148,16 +159,20 @@ struct Detail: View{
     @State var photo = ""
     
     var body: some View{
-        Text(data.name)
-        Text(data.datetime)
-        //Text(data.uid)
-        Text(data.notes)
-        if data.notes != ""{
-            Text(data.photo).onTapGesture {
-                let url = URL(string: data.photo)
-                UIApplication.shared.open(url!)
-                //print("1\(data.photo)")
-            }.foregroundColor(.blue)
+        ZStack(alignment: .top){
+        GeometryReader{_ in
+        }.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
+            VStack (spacing: 10){
+            Text(data.name)
+            Text(data.datetime)
+            Text(data.notes)
+            if data.notes != ""{
+                Text(data.photo).onTapGesture {
+                    let url = URL(string: data.photo)
+                    UIApplication.shared.open(url!)
+                }.foregroundColor(Color("DarkBlueRGB"))
+            }
+            }
         }
     }
 }

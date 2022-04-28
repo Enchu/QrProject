@@ -17,23 +17,22 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
         setUpElements()
+        
     }
- 
     
     func setUpElements(){
         errorLabel.alpha = 0
+        
         
         Utilities.styleTextField(emailTextField)
         Utilities.styleTextField(passwordTextField)
         Utilities.styleFiledButton(loginButton)
     }
+    
     @IBAction func loginChanged(_ sender: UITextField) {
         let CleanedEmail = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         if Utilities.isValidEmail(CleanedEmail) == false{ return }
@@ -41,15 +40,16 @@ class LoginViewController: UIViewController {
             Utilities.styleColorTextField(emailTextField)
         }
         if sender.text!.count < 6{
-            Utilities.styleTextField(emailTextField)
+            Utilities.styleColorTextFieldRed(emailTextField)
         }
     }
+    
     @IBAction func passwordChanged(_ sender: UITextField) {
-        if sender.text!.count > 6{
+        if sender.text!.count >= 6{
             Utilities.styleColorTextField(passwordTextField)
         }
         if sender.text!.count < 6{
-            Utilities.styleTextField(passwordTextField)
+            Utilities.styleColorTextFieldRed(passwordTextField)
         }
     }
     
@@ -85,6 +85,7 @@ class LoginViewController: UIViewController {
         view.window?.rootViewController = adminViewControllers
         view.window?.makeKeyAndVisible()
     }
+    
     
     var uidLog=""
 

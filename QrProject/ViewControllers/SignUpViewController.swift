@@ -33,29 +33,32 @@ class SignUpViewController: UIViewController {
     func setUpElements(){
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
         errorLabel.alpha = 0
+        
         Utilities.styleTextField(firstNameTextField)
         Utilities.styleTextField(lastNameTextField)
         Utilities.styleTextField(emailTextField)
         Utilities.styleTextField(passwordTextField)
+        
         Utilities.styleFiledButton(signUpButton)
         Utilities.styleLabel(errorLabel)
     }
     
     @IBAction func firstNameChanged(_ sender: UITextField) {
         //if Utilities.isCurrentSize(sender.text!) == false{ return}
-        if sender.text!.count > 2{
+        if sender.text!.count >= 2{
             Utilities.styleColorTextField(firstNameTextField)
         }
         if sender.text!.count<2{
-            Utilities.styleTextField(firstNameTextField)
+            Utilities.styleColorTextFieldRed(firstNameTextField)
+            //Utilities.styleTextField(firstNameTextField)
         }
     }
     @IBAction func lastNameChanged(_ sender: UITextField) {
-        if sender.text!.count > 2{
+        if sender.text!.count >= 2{
             Utilities.styleColorTextField(lastNameTextField)
         }
         if sender.text!.count < 2{
-            Utilities.styleTextField(lastNameTextField)
+            Utilities.styleColorTextFieldRed(lastNameTextField)
         }
     }
     @IBAction func loginChanged(_ sender: UITextField) {
@@ -65,7 +68,7 @@ class SignUpViewController: UIViewController {
             Utilities.styleColorTextField(emailTextField)
         }
         if sender.text!.count < 6{
-            Utilities.styleTextField(emailTextField)
+            Utilities.styleColorTextFieldRed(emailTextField)
         }
     }
     @IBAction func passwordChanged(_ sender: UITextField) {
@@ -77,7 +80,7 @@ class SignUpViewController: UIViewController {
             Utilities.styleColorTextField(passwordTextField)
         }
         if sender.text!.count < 6{
-            Utilities.styleTextField(passwordTextField)
+            Utilities.styleColorTextFieldRed(passwordTextField)
         }
     }
     
@@ -146,11 +149,16 @@ class SignUpViewController: UIViewController {
                       }
                     }
                     self.transitionToLogin()
+                    
+                    /*let Res = result?.user.uid
+                    self.uidLog = Res!
+                    self.transitionToHome()*/
                }//End Else Auth
             }//End Auth
         }//End Else
         
     }//End sign Up tapped
+    
     
     func transitionToLogin(){
         let loginViewControllers = storyboard?.instantiateViewController(identifier: Constants.Storyboard.loginViewController) as? LoginViewController
@@ -158,8 +166,10 @@ class SignUpViewController: UIViewController {
         view.window?.makeKeyAndVisible()
     }
     
+    var uidLog=""
     func transitionToHome(){
         let homeViewControllers = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
+        homeViewControllers?.uidLL = self.uidLog
         view.window?.rootViewController = homeViewControllers
         view.window?.makeKeyAndVisible()
     }

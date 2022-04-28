@@ -8,11 +8,10 @@ import UIKit
 import SwiftUI
 import Firebase
 import CoreMedia
+import AVFAudio
 
 
 struct ContentView: View {
-
-    @ObservedObject var model = ViewModel()
 
     @State var datetime = ""
     @State var name = ""
@@ -21,69 +20,23 @@ struct ContentView: View {
     @State var photo = ""
     
     @State var txt = ""
-
     var body: some View {
-        
-        //Update and Delete
-        NavigationView(){
-            
-            ZStack(alignment: .top){
-                GeometryReader{_ in
-                }.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
-                
-            VStack(spacing: 0){
-                List(model.list){ item in
-            HStack{
-                var Probel = " "
-                if(item.notes == ""){
-                    Group{
-                        Text(item.datetime + Probel + item.name)
-                    }.background(Color.green)
-                        .font(.system(size: 20))//name: "Apple SD Gothic Neo", size: 20
-                }
-                else{
-                    Group{
-                        Text(item.datetime + Probel + item.name)
-                    }.background(Color.red)
-                        .font(.system(size: 20))
-                }
-                Spacer()
-                //Updata data
-                /*Button(action: {
-                    model.updataData(qfUpdate: item)
-                }, label: {
-                    Image(systemName: "pencil")
-                })
-                .buttonStyle(BorderedButtonStyle())*/
-                
-                //Delete data
-                Button(action: {
-                    model.deleteData(qfDelete: item)
-                }, label: {
-                    Image(systemName: "minus.circle")
-                })
-                .buttonStyle(BorderedButtonStyle())
-            }
-                }.background().colorMultiply(Color("BlueRGB"))
-                    .foregroundColor(.black)
-                //End List
-                Divider()
-                VStack(spacing: 10){
-                    NavigationLink("Поиск",destination: SearchTable())
-                }
-        }
-            }.navigationTitle("")
-                .navigationBarHidden(true)
-                .navigationViewStyle(StackNavigationViewStyle())
-        }
+        TabView{
+            HomeView().tabItem({
+                Image(systemName: "house")
+                Text("Главная")
+            })
+            SearchTable().tabItem({
+                Image(systemName: "magnifyingglass")
+                Text("Поиск")
+            })
+            Filter().tabItem({
+                Image(systemName: "link")
+                Text("Фильтр")
+            })
+        }.background(Color("BlueRGB")).edgesIgnoringSafeArea(.all)
     } //End View
-
-    init() {
-        model.getData()
-    }
 }
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
@@ -110,14 +63,14 @@ struct SearchTable:View{
                 
                 VStack (spacing: 0){
                     HStack(){
-                        TextField("Поиск", text: self.$txt).textFieldStyle(RoundedBorderTextFieldStyle())
+                        TextField("Поиск", text: self.$txt).textFieldStyle(RoundedBorderTextFieldStyle()).padding(.top)
                         if self.txt != ""{
                             Button(action: {
                                 self.txt = ""
                             })
                             {
                                 Text("Закрыть")
-                            }.foregroundColor(.black)
+                            }.foregroundColor(.black).padding(.top)
                         }
                     }.padding()
                     
@@ -138,10 +91,99 @@ struct SearchTable:View{
                                 .foregroundColor(.black)
                         }
                     }
-                }//.padding()
-            }.navigationTitle("")
+                    Divider()
+                }
+            }.navigationTitle("Назад к поиску")
                 .navigationBarHidden(true)
                 .navigationViewStyle(StackNavigationViewStyle())
+        }
+    }
+    init() {
+        model.getData()
+    }
+}
+
+struct HomeView:View{
+    @ObservedObject var model = ViewModel()
+    @State var datetime = ""
+    @State var name = ""
+    @State var uid = ""
+    @State var notes = ""
+    @State var photo = ""
+    
+    @State var txt = ""
+    
+    var body: some View{
+        //Update and Delete
+        NavigationView(){
+            ZStack(alignment: .top){
+                GeometryReader{_ in}.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
+            VStack(spacing: 0){
+                List(model.list){ item in
+            HStack{
+                var Probel = " "
+                if(item.notes == ""){
+                    Group{
+                        Text(item.datetime + Probel + item.name)
+                    }.background(Color("GreenRGB"))
+                        .font(Font.custom("Apple SD Gothic Neo", size: 20))
+                }
+                else{
+                    Group{
+                        Text(item.datetime + Probel + item.name)
+                    }.background(Color("RedRGB"))//Color("RedRGB")
+                        .font(Font.custom("Apple SD Gothic Neo", size: 20))
+                }
+                Spacer()
+                //Updata data
+                /*Button(action: {
+                    model.updataData(qfUpdate: item)
+                }, label: {
+                    Image(systemName: "pencil")
+                })
+                .buttonStyle(BorderedButtonStyle())*/
+                
+                //Delete data
+                Button(action: {
+                    model.deleteData(qfDelete: item)
+                }, label: {
+                    Image(systemName: "minus.circle")
+                })
+                .buttonStyle(BorderedButtonStyle())
+            }
+                }.background().colorMultiply(Color("BlueRGB"))
+                    .foregroundColor(.black)
+                //End List
+                Divider()
+                //VStack(spacing: 10){NavigationLink("Поиск",destination: SearchTable())}
+        }
+            }.navigationTitle("Назад")
+                .navigationBarHidden(true)
+                .navigationViewStyle(StackNavigationViewStyle())
+        }.padding(.top).background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
+    }
+    init() {
+        model.getData()
+        //UITableView.appearance().backgroundColor = .clear
+    }
+}
+
+struct Filter:View{
+    @ObservedObject var model = ViewModel()
+    @State private var dateTime = Date()
+    @State var dateStart = Date()
+    @State var dateEnd = Date()
+    
+    var body: some View{
+        ZStack(alignment: .top){
+            GeometryReader{_ in}.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
+            VStack(spacing: 10){
+                DatePicker("Дата начала", selection: $dateTime).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding(.top)
+                DatePicker("Дата окончания", selection: $dateTime).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding(.top)
+                Divider()
+                //let fallsBerween = (dateStart ... dateEnd).contains(Date())
+                //print(fallsBerween)
+            }.padding()
         }
     }
     init() {

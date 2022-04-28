@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 import SwiftUI
 
+
 class Utilities{
-     
+    
     static func styleTextField(_ textField:UITextField){
         let bottomLine = CALayer()
-        textField.clearsContextBeforeDrawing = true
-        bottomLine.frame = CGRect(x:0,y: textField.frame.height - 2, width:textField.frame.width,height: 2)
+        bottomLine.frame = CGRect(x:0,y: textField.frame.height - 2, width: textField.frame.width - 24,height: 2)
         //bottomLine.backgroundColor = UIColor.init(red:48/255,green: 173/255,blue: 88/255,alpha: 1).cgColor
         bottomLine.backgroundColor = UIColor.init(red:253/255,green: 23/255,blue: 101/255,alpha: 1).cgColor
         textField.borderStyle = .none
@@ -23,7 +23,7 @@ class Utilities{
         textField.returnKeyType = .done
         textField.font = UIFont(name: "Apple SD Gothic Neo", size: 20)
         textField.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        textField.tintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        textField.tintColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.addSublayer(bottomLine)
     }
@@ -42,14 +42,20 @@ class Utilities{
     
     static func styleColorTextField(_ textField:UITextField){
         let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x:0,y: textField.frame.height - 2, width:textField.frame.width,height: 2)
+        bottomLine.frame = CGRect(x:0, y: textField.frame.height - 2, width:textField.frame.width, height: 2)
         bottomLine.backgroundColor = UIColor.init(red: 0/255, green: 100/255, blue: 0/255, alpha: 1).cgColor
         textField.layer.addSublayer(bottomLine)
-        //
+    }
+    
+    static func styleColorTextFieldRed(_ textField:UITextField){
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x:0, y: textField.frame.height - 2, width:textField.frame.width, height: 2)
+        bottomLine.backgroundColor = UIColor.init(red:253/255,green: 23/255,blue: 101/255,alpha: 1).cgColor
+        textField.layer.addSublayer(bottomLine)
     }
     
     static func styleFiledButton(_ button:UIButton){
-        //button.backgroundColor = UIColor.init(red: 51/255, green: 122/255, blue: 183/255, alpha:1)
+        button.backgroundColor = UIColor.init(red: 51/255, green: 122/255, blue: 183/255, alpha:1)
         button.backgroundColor = UIColor.init(red: 0/255, green: 37/255, blue: 89/255, alpha:1)
         button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont(name: "Avenir Book", size: 17)
@@ -66,7 +72,6 @@ class Utilities{
     
      static func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }

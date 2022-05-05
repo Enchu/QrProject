@@ -109,7 +109,7 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
     func listAllPhoto(){
         let storageReference = storageGlobal.child("images/")
         storageReference.list(maxResults: Int64(maxRes)) { (result, error) in
-            if let error = error {
+            if error != nil {//if let error = error {
               print("No way")
             }
             print(self.maxRes)
@@ -193,7 +193,7 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
         let notes = addNotes
         let db = Firestore.firestore()
         if globalURL != ""{
-            db.collection("qf").addDocument(data: ["datetime":currentDateTime,"name":message,"uid":self.uidLL,"notes":notes,"photo":globalURL ])
+           db.collection("qf").addDocument(data: ["datetime":currentDateTime,"name":message,"uid":self.uidLL,"notes":notes,"photo":globalURL ])
             {(error) in
                         if error != nil{
                             print((error?.localizedDescription)!)
@@ -228,7 +228,7 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
     }
     
     //Работа после обнаружения QRcod
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection){
         guard metadataObjects.count > 0 else {return}
         if let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject{
             if object.type == AVMetadataObject.ObjectType.qr{
@@ -236,7 +236,7 @@ class HomeViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegat
                 alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { (action) in
                     print(object.stringValue!)
                 }))
-                present(alert, animated: true, completion: {
+               present(alert, animated: true, completion: {
                     self.addBase(object.stringValue!)
                 })
             }

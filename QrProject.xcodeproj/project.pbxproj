@@ -28,6 +28,7 @@
 		B0874AD728002AD8007A2C4A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B0874AD628002AD8007A2C4A /* FirebaseFirestore */; };
 		B0C39D82280D3EA700768C49 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B0C39D81280D3EA700768C49 /* FirebaseStorage */; };
 		B0C5454E28055853006E2464 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C5454D28055853006E2464 /* AdminViewController.swift */; };
+		B0C7E92C281C043700A7A957 /* DatePickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C7E92B281C043700A7A957 /* DatePickerTextField.swift */; };
 		B0D1BE6A280549E600922760 /* QFData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D1BE69280549E600922760 /* QFData.swift */; };
 		B0D1BE6C28054AC700922760 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D1BE6B28054AC700922760 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,7 @@
 		B07951D328003EFD0060E1AE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B07B3E5F280FF37E0023BEBB /* VerificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationModel.swift; sourceTree = "<group>"; };
 		B0C5454D28055853006E2464 /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
+		B0C7E92B281C043700A7A957 /* DatePickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTextField.swift; sourceTree = "<group>"; };
 		B0D1BE69280549E600922760 /* QFData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QFData.swift; sourceTree = "<group>"; };
 		B0D1BE6B28054AC700922760 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				B0D1BE6B28054AC700922760 /* ViewModel.swift */,
+				B0C7E92B281C043700A7A957 /* DatePickerTextField.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				B00A3613280551380016BD6E /* ContentView.swift in Sources */,
 				B0D1BE6A280549E600922760 /* QFData.swift in Sources */,
 				B0D1BE6C28054AC700922760 /* ViewModel.swift in Sources */,
+				B0C7E92C281C043700A7A957 /* DatePickerTextField.swift in Sources */,
 				B0081E42280006FA008BFBA4 /* AppDelegate.swift in Sources */,
 				B006410E280011F000143E4B /* Utilities.swift in Sources */,
 				B0081E56280007A0008BFBA4 /* SignUpViewController.swift in Sources */,
@@ -332,7 +336,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "НЭК Обход";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -387,7 +391,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "НЭК Обход";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -12,14 +12,6 @@ import AVFAudio
 
 
 struct ContentView: View {
-
-    @State var datetime = ""
-    @State var name = ""
-    @State var uid = ""
-    @State var notes = ""
-    @State var photo = ""
-    
-    @State var txt = ""
     var body: some View {
         TabView{
             HomeView().tabItem({
@@ -47,20 +39,13 @@ struct ContentView_Previews: PreviewProvider {
 struct SearchTable:View{
     
     @ObservedObject var model = ViewModel()
-
-    @State var datetime = ""
-    @State var name = ""
-    @State var uid = ""
-    @State var notes = ""
     @State var txt = ""
     
     var body: some View{
         NavigationView(){
             ZStack(alignment: .top){
                 GeometryReader{_ in
-                    //Text("Home")
                 }.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
-                
                 VStack (spacing: 0){
                     HStack(){
                         TextField("Поиск", text: self.$txt).textFieldStyle(RoundedBorderTextFieldStyle()).padding(.top)
@@ -80,10 +65,10 @@ struct SearchTable:View{
                             Text("Нет результата").foregroundColor(Color.black.opacity(0.5)).padding()
                         }
                         else{
-                            List(self.model.list.filter{$0.datetime.lowercased().contains(self.txt.lowercased())}
-                            )
+                            List(self.model.list.filter{$0.datetime.lowercased().contains(self.txt.lowercased())})
                             {i in
-                                NavigationLink(destination: Detail(data: i)){
+                                NavigationLink(destination: Detail(data: i))
+                                {
                                 Text(i.name)
                                 Text(i.datetime)
                                 }
@@ -105,12 +90,7 @@ struct SearchTable:View{
 
 struct HomeView:View{
     @ObservedObject var model = ViewModel()
-    @State var datetime = ""
-    @State var name = ""
-    @State var uid = ""
-    @State var notes = ""
-    @State var photo = ""
-    
+    @State private var showingAlert = false
     @State var txt = ""
     
     var body: some View{
@@ -120,42 +100,37 @@ struct HomeView:View{
                 GeometryReader{_ in}.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
             VStack(spacing: 0){
                 List(model.list){ item in
-            HStack{
-                var Probel = " "
+            HStack{let Probel = " "
                 if(item.notes == ""){
                     Group{
                         Text(item.datetime + Probel + item.name)
                     }.background(Color("GreenRGB"))
-                        .font(Font.custom("Apple SD Gothic Neo", size: 20))
                 }
                 else{
                     Group{
                         Text(item.datetime + Probel + item.name)
-                    }.background(Color("RedRGB"))//Color("RedRGB")
-                        .font(Font.custom("Apple SD Gothic Neo", size: 20))
+                    }.background(Color.red).foregroundColor(.white)//.background(Color("RedRGB"))
                 }
                 Spacer()
-                //Updata data
-                /*Button(action: {
-                    model.updataData(qfUpdate: item)
-                }, label: {
-                    Image(systemName: "pencil")
-                })
-                .buttonStyle(BorderedButtonStyle())*/
-                
                 //Delete data
                 Button(action: {
-                    model.deleteData(qfDelete: item)
+                    showingAlert = true
+                    //model.deleteData(qfDelete: item)
                 }, label: {
                     Image(systemName: "minus.circle")
-                })
-                .buttonStyle(BorderedButtonStyle())
+                }).buttonStyle(BorderedButtonStyle())
+                    .alert(isPresented: $showingAlert){
+                    Alert(
+                    title: Text("Вы действительно хотите удалить"),
+                    primaryButton: .destructive(Text("Удалить"),action:{
+                    model.deleteData(qfDelete: item)
+                }),
+                      secondaryButton:.cancel(Text("Отменить"),action: {
+                }))}
             }
                 }.background().colorMultiply(Color("BlueRGB"))
-                    .foregroundColor(.black)
-                //End List
+                    .font(Font.custom("Apple SD Gothic Neo", size: 20))
                 Divider()
-                //VStack(spacing: 10){NavigationLink("Поиск",destination: SearchTable())}
         }
             }.navigationTitle("Назад")
                 .navigationBarHidden(true)
@@ -170,19 +145,46 @@ struct HomeView:View{
 
 struct Filter:View{
     @ObservedObject var model = ViewModel()
-    @State private var dateTime = Date()
+    
     @State var dateStart = Date()
     @State var dateEnd = Date()
+    @State var txt = ""
+    
+    
+    private let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        //dateFormatter.dateFormat = "yyyy/MM/dd"
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale(identifier: "ru_Ru")
+        return dateFormatter
+    }()
     
     var body: some View{
         ZStack(alignment: .top){
             GeometryReader{_ in}.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
             VStack(spacing: 10){
-                DatePicker("Дата начала", selection: $dateTime).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding(.top)
-                DatePicker("Дата окончания", selection: $dateTime).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding(.top)
+                DatePicker("Дата начала", selection: $dateStart).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding(.top)
+                DatePicker("Дата окончания", selection: $dateEnd).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding(.top)
+                Text("\(dateFormatter.string(from: dateStart))")
+                Text("\(dateFormatter.string(from: dateEnd))")
                 Divider()
-                //let fallsBerween = (dateStart ... dateEnd).contains(Date())
-                //print(fallsBerween)
+                if self.model.list.filter({$0.datetime.lowercased().contains(dateFormatter.string(from: dateStart))}).count == 0
+                && self.model.list.filter({$0.datetime.lowercased().contains(dateFormatter.string(from: dateEnd))}).count == 0
+                {
+                    Text("Нет результата").foregroundColor(Color.black.opacity(0.5)).padding()
+                }
+                else{
+                    
+                    List(self.model.list.filter{$0.datetime.lowercased().contains(dateFormatter.string(from: dateStart))})
+                    {i in
+                        NavigationLink(destination: Detail(data: i)){
+                        Text(i.name)
+                        Text(i.datetime)
+                        }
+                    }.background().colorMultiply(Color("BlueRGB"))
+                        .foregroundColor(.black)
+                }
             }.padding()
         }
     }

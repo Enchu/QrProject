@@ -44,8 +44,7 @@ struct SearchTable:View{
     var body: some View{
         NavigationView(){
             ZStack(alignment: .top){
-                GeometryReader{_ in
-                }.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
+                GeometryReader{_ in}.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
                 VStack (spacing: 0){
                     HStack(){
                         TextField("Поиск", text: self.$txt).textFieldStyle(RoundedBorderTextFieldStyle()).padding(.top)
@@ -69,12 +68,23 @@ struct SearchTable:View{
                             {i in
                                 NavigationLink(destination: Detail(data: i))
                                 {
-                                Text(i.name)
-                                Text(i.datetime)
+                                    Text(i.name)
+                                    Text(i.datetime)
                                 }
                             }.background().colorMultiply(Color("BlueRGB"))
                                 .foregroundColor(.black)
                         }
+                    }
+                    else{
+                        List(self.model.list)
+                        {i in
+                            NavigationLink(destination: Detail(data: i))
+                            {
+                                Text(i.name)
+                                Text(i.datetime)
+                            }
+                        }.background().colorMultiply(Color("BlueRGB"))
+                            .foregroundColor(.black)
                     }
                     Divider()
                 }
@@ -163,27 +173,37 @@ struct Filter:View{
     var body: some View{
         ZStack(alignment: .top){
             GeometryReader{_ in}.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
-            VStack(spacing: 10){
-                DatePicker("Дата начала", selection: $dateStart).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding(.top)
-                DatePicker("Дата окончания", selection: $dateEnd).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding(.top)
-                Text("\(dateFormatter.string(from: dateStart))")
-                Text("\(dateFormatter.string(from: dateEnd))")
-                Divider()
-                if self.model.list.filter({$0.datetime.lowercased().contains(dateFormatter.string(from: dateStart))}).count == 0
+            VStack(spacing: 0){
+                DatePicker("Дата начала", selection: $dateStart).environment(\.locale, Locale.init(identifier: "ru_Ru"))
+                DatePicker("Дата окончания", selection: $dateEnd).environment(\.locale, Locale.init(identifier: "ru_Ru"))
+                /*if self.model.list.filter({$0.datetime.lowercased().contains(dateFormatter.string(from: dateStart))}).count == 0
                 && self.model.list.filter({$0.datetime.lowercased().contains(dateFormatter.string(from: dateEnd))}).count == 0
                 {
                     Text("Нет результата").foregroundColor(Color.black.opacity(0.5)).padding()
+                }*/
+                //else{
+                if dateStart != dateEnd{
+                    var txtStart = dateFormatter.string(from: dateStart)
+                    var txtEnd = dateFormatter.string(from: dateEnd)
+                    List(self.model.list.filter{
+                        $0.datetime.lowercased() > txtStart.lowercased() && $0.datetime.lowercased() < txtEnd.lowercased()
+                    })
+                    {i in
+                        NavigationLink(destination: Detail(data: i)){
+                            Text(i.name)
+                            Text(i.datetime)
+                        }
+                    }.background().colorMultiply(Color("BlueRGB")).foregroundColor(.black)
+                //}
                 }
                 else{
-                    
-                    List(self.model.list.filter{$0.datetime.lowercased().contains(dateFormatter.string(from: dateStart))})
+                    List(self.model.list)
                     {i in
                         NavigationLink(destination: Detail(data: i)){
                         Text(i.name)
                         Text(i.datetime)
                         }
-                    }.background().colorMultiply(Color("BlueRGB"))
-                        .foregroundColor(.black)
+                    }.background().colorMultiply(Color("BlueRGB")).foregroundColor(.black)
                 }
             }.padding()
         }

@@ -64,7 +64,9 @@ struct SearchTable:View{
                             Text("Нет результата").foregroundColor(Color.black.opacity(0.5)).padding()
                         }
                         else{
-                            List(self.model.list.filter{$0.datetime.lowercased().contains(self.txt.lowercased())})
+                            List(self.model.list.filter{
+                                $0.datetime.lowercased().contains(self.txt.lowercased()) ||
+                                $0.name.lowercased().contains(self.txt.lowercased())})
                             {i in
                                 NavigationLink(destination: Detail(data: i))
                                 {
@@ -174,19 +176,15 @@ struct Filter:View{
         ZStack(alignment: .top){
             GeometryReader{_ in}.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
             VStack(spacing: 0){
-                DatePicker("Дата начала", selection: $dateStart).environment(\.locale, Locale.init(identifier: "ru_Ru"))
-                DatePicker("Дата окончания", selection: $dateEnd).environment(\.locale, Locale.init(identifier: "ru_Ru"))
-                /*if self.model.list.filter({$0.datetime.lowercased().contains(dateFormatter.string(from: dateStart))}).count == 0
-                && self.model.list.filter({$0.datetime.lowercased().contains(dateFormatter.string(from: dateEnd))}).count == 0
-                {
-                    Text("Нет результата").foregroundColor(Color.black.opacity(0.5)).padding()
-                }*/
-                //else{
+                //DatePicker("Дата начала", selection: $dateStart).environment(\.locale, Locale.init(identifier: "ru_Ru"))
+                DatePicker("Дата начала", selection: $dateStart,displayedComponents: [.date]).environment(\.locale, Locale.init(identifier: "ru_Ru"))
+                DatePicker("Дата окончания", selection: $dateEnd,displayedComponents: [.date]).environment(\.locale, Locale.init(identifier: "ru_Ru"))
                 if dateStart != dateEnd{
                     var txtStart = dateFormatter.string(from: dateStart)
                     var txtEnd = dateFormatter.string(from: dateEnd)
                     List(self.model.list.filter{
-                        $0.datetime.lowercased() > txtStart.lowercased() && $0.datetime.lowercased() < txtEnd.lowercased()
+                        //$0.datetime.lowercased().range(of: txtStart...txtEnd)
+                        $0.datetime.lowercased() >= txtStart.lowercased() && $0.datetime.lowercased() <= txtEnd.lowercased()
                     })
                     {i in
                         NavigationLink(destination: Detail(data: i)){
@@ -194,7 +192,6 @@ struct Filter:View{
                             Text(i.datetime)
                         }
                     }.background().colorMultiply(Color("BlueRGB")).foregroundColor(.black)
-                //}
                 }
                 else{
                     List(self.model.list)

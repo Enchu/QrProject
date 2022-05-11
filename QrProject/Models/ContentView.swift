@@ -95,6 +95,7 @@ struct SearchTable:View{
                 .navigationViewStyle(StackNavigationViewStyle())
         }
     }
+    
     init() {
         model.getData()
     }

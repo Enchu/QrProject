@@ -72,17 +72,28 @@ struct SearchTable:View{
                             Text("Нет результата").foregroundColor(Color.black.opacity(0.5)).padding()
                         }
                         else{
-                            List(self.model.list.filter{
-                                $0.datetime.lowercased().contains(self.txt.lowercased()) ||
-                                $0.name.lowercased().contains(self.txt.lowercased())})
+                            ForEach(self.model.list.filter{
+                                $0.datetime.lowercased().contains(self.txt.lowercased())
+                                || $0.name.lowercased().contains(self.txt.lowercased())
+                            })
                             {i in
                                 NavigationLink(destination: Detail(data: i))
                                 {
-                                    Text(i.name)
-                                    Text(i.datetime)
-                                }
-                            }.background().colorMultiply(Color("BlueRGB"))
-                                .foregroundColor(.black)
+                                    VStack(alignment:.leading){
+                                        Text(i.name).font(.headline)
+                                        HStack{
+                                            Text(i.datetime)
+                                            Spacer()
+                                            if i.notes != "" {
+                                                Image(systemName: "flame.fill")
+                                            }
+                                        }
+                                    }
+                                }.foregroundColor(.white)
+                                    .padding()
+                                    .background(Color("DarkBlueRGB").cornerRadius(10))
+                                    .padding(.horizontal)
+                            }
                         }
                     }
                     else{
@@ -91,17 +102,20 @@ struct SearchTable:View{
                             NavigationLink(destination: Detail(data: i))
                             {
                                 VStack(alignment:.leading){
+                                    Text(i.name).font(.headline)
                                     HStack{
-                                        Text(i.name)
                                         Text(i.datetime)
                                         Spacer()
+                                        if i.notes != "" {
+                                            Image(systemName: "flame.fill")
+                                        }
                                     }
                                 }
                             }.foregroundColor(.white)
                                 .padding()
                                 .background(Color("DarkBlueRGB").cornerRadius(10))
                                 .padding(.horizontal)
-                        }//.background().colorMultiply(Color("BlueRGB")).foregroundColor(.black)
+                        }
                     }
                     Divider()
                 }
@@ -281,8 +295,10 @@ struct ArrayesFilter:View{
     var body: some View{
         ScrollView{
             VStack(spacing: 10){
-                DatePicker("Дата начала", selection: $dateStart,displayedComponents: [.date]).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding()
-                DatePicker("Дата окончания", selection: $dateEnd,displayedComponents: [.date]).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding()
+                VStack(){
+                    DatePicker("Дата начала", selection: $dateStart,displayedComponents: [.date]).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding(.top)
+                    DatePicker("Дата окончания", selection: $dateEnd,displayedComponents: [.date]).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding(.top)
+                }.padding()
                 var txtStart = dateFormatter.string(from: dateStart)
                 var txtEnd = dateFormatter.string(from: dateEnd)
                     

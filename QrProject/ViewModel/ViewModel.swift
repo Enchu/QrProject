@@ -9,7 +9,16 @@ import Foundation
 import Firebase
 
 class ViewModel: ObservableObject{
-    @Published var list = [QFData]()
+    @Published var list:[QFData] = []
+    @Published var filterList: [QFData] = []
+
+    func sortData(){
+        filterList = list.sorted { (datetime1, datetime2) -> Bool in
+            return datetime1.datetime > datetime2.datetime
+        }
+        self.list.sort(by: {$0.datetime < $1.datetime})
+        filterList = list.sorted(by: {$0.datetime < $1.datetime})
+    }
     
     func updataData(qfUpdate:QFData){
         let db = Firestore.firestore()
@@ -70,26 +79,25 @@ class ViewModel: ObservableObject{
     }
     }
     
+    
     func getData(){
         let db = Firestore.firestore()
         db.collection("qf").getDocuments{snapshot,error in
             if error == nil{
-               //No errors
                 if let shapshot = snapshot{
                     //Update the list property in the main theard
                     DispatchQueue.main.async {
                         //get all the documents and Create qf
                         self.list = shapshot.documents.map{d in
                             //Crate a QF item for each document returned
-                            return QFData(id: d.documentID, name: d["name"] as? String ?? "",
+                            return QFData(id: d.documentID,
+                                          name: d["name"] as? String ?? "",
                                           datetime: d["datetime"] as? String ?? "",
                                           uid: d["uid"] as? String ?? "",
                                           notes:d["notes"] as? String ?? "",
                                         photo:d["photo"] as? String ?? "")
-                                            
                         }
                     }
-                    
                 }
             }
             else{

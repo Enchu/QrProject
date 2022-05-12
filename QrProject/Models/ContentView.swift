@@ -14,19 +14,27 @@ import AVFAudio
 struct ContentView: View {
     var body: some View {
         TabView{
-            HomeView().tabItem({
+            ArraysHomeView().tabItem({
                 Image(systemName: "house")
                 Text("Главная")
             })
+            /*HomeView().tabItem({
+                Image(systemName: "house")
+                Text("Главная")
+            })*/
             SearchTable().tabItem({
                 Image(systemName: "magnifyingglass")
                 Text("Поиск")
             })
-            Filter().tabItem({
+            /*Filter().tabItem({
+                Image(systemName: "link")
+                Text("Фильтр")
+            })*/
+            ArrayesFilter().tabItem({
                 Image(systemName: "link")
                 Text("Фильтр")
             })
-        }.background(Color("BlueRGB")).edgesIgnoringSafeArea(.all)
+        }.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
     } //End View
 }
 
@@ -43,9 +51,9 @@ struct SearchTable:View{
     
     var body: some View{
         NavigationView(){
-            ZStack(alignment: .top){
-                GeometryReader{_ in}.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
-                VStack (spacing: 0){
+            ScrollView{
+                //GeometryReader{_ in}.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
+                VStack (spacing: 10){
                     HStack(){
                         TextField("Поиск", text: self.$txt).textFieldStyle(RoundedBorderTextFieldStyle()).padding(.top)
                         if self.txt != ""{
@@ -78,21 +86,29 @@ struct SearchTable:View{
                         }
                     }
                     else{
-                        List(self.model.list)
+                        ForEach(self.model.list.sorted(by: {$0.datetime > $1.datetime}))
                         {i in
                             NavigationLink(destination: Detail(data: i))
                             {
-                                Text(i.name)
-                                Text(i.datetime)
-                            }
-                        }.background().colorMultiply(Color("BlueRGB"))
-                            .foregroundColor(.black)
+                                VStack(alignment:.leading){
+                                    HStack{
+                                        Text(i.name)
+                                        Text(i.datetime)
+                                        Spacer()
+                                    }
+                                }
+                            }.foregroundColor(.white)
+                                .padding()
+                                .background(Color("DarkBlueRGB").cornerRadius(10))
+                                .padding(.horizontal)
+                        }//.background().colorMultiply(Color("BlueRGB")).foregroundColor(.black)
                     }
                     Divider()
                 }
             }.navigationTitle("Назад к поиску")
                 .navigationBarHidden(true)
                 .navigationViewStyle(StackNavigationViewStyle())
+                .background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
         }
     }
     
@@ -105,6 +121,13 @@ struct HomeView:View{
     @ObservedObject var model = ViewModel()
     @State private var showingAlert = false
     @State var txt = ""
+    let Probel = " "
+    
+    func compareDates(_ first: String, _ second: String) -> Bool {
+        let formatterDate = DateFormatter()
+        formatterDate.dateFormat = "dd/MM/yyyy"
+        return formatterDate.date(from: first)! < formatterDate.date(from: second)!
+    }
     
     var body: some View{
         //Update and Delete
@@ -112,23 +135,20 @@ struct HomeView:View{
             ZStack(alignment: .top){
                 GeometryReader{_ in}.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
             VStack(spacing: 0){
-                List(model.list){ item in
-            HStack{let Probel = " "
+                List(model.list.sorted(by: {$0.datetime > $1.datetime})) { item in
+            HStack{
                 if(item.notes == ""){
-                    Group{
-                        Text(item.datetime + Probel + item.name)
+                    Group{ Text(item.name + Probel + item.datetime)
                     }.background(Color("GreenRGB"))
                 }
                 else{
-                    Group{
-                        Text(item.datetime + Probel + item.name)
+                    Group{ Text(item.name + Probel + item.datetime)
                     }.background(Color.red).foregroundColor(.white)//.background(Color("RedRGB"))
                 }
                 Spacer()
                 //Delete data
                 Button(action: {
                     showingAlert = true
-                    //model.deleteData(qfDelete: item)
                 }, label: {
                     Image(systemName: "minus.circle")
                 }).buttonStyle(BorderedButtonStyle())
@@ -148,25 +168,21 @@ struct HomeView:View{
             }.navigationTitle("Назад")
                 .navigationBarHidden(true)
                 .navigationViewStyle(StackNavigationViewStyle())
-        }.padding(.top).background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
+        }//.padding(.top).background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
     }
     init() {
         model.getData()
-        //UITableView.appearance().backgroundColor = .clear
     }
 }
 
 struct Filter:View{
     @ObservedObject var model = ViewModel()
-    
     @State var dateStart = Date()
     @State var dateEnd = Date()
     @State var txt = ""
     
-    
     private let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        //dateFormatter.dateFormat = "yyyy/MM/dd"
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
         dateFormatter.locale = Locale(identifier: "ru_Ru")
@@ -176,15 +192,13 @@ struct Filter:View{
     var body: some View{
         ZStack(alignment: .top){
             GeometryReader{_ in}.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
-            VStack(spacing: 0){
-                //DatePicker("Дата начала", selection: $dateStart).environment(\.locale, Locale.init(identifier: "ru_Ru"))
-                DatePicker("Дата начала", selection: $dateStart,displayedComponents: [.date]).environment(\.locale, Locale.init(identifier: "ru_Ru"))
-                DatePicker("Дата окончания", selection: $dateEnd,displayedComponents: [.date]).environment(\.locale, Locale.init(identifier: "ru_Ru"))
-                if dateStart != dateEnd{
+            VStack(spacing: 10){
+                DatePicker("Дата начала", selection: $dateStart,displayedComponents: [.date]).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding(.top)
+                DatePicker("Дата окончания", selection: $dateEnd,displayedComponents: [.date]).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding(.top)
                     var txtStart = dateFormatter.string(from: dateStart)
                     var txtEnd = dateFormatter.string(from: dateEnd)
+                    
                     List(self.model.list.filter{
-                        //$0.datetime.lowercased().range(of: txtStart...txtEnd)
                         $0.datetime.lowercased() >= txtStart.lowercased() && $0.datetime.lowercased() <= txtEnd.lowercased()
                     })
                     {i in
@@ -192,20 +206,106 @@ struct Filter:View{
                             Text(i.name)
                             Text(i.datetime)
                         }
-                    }.background().colorMultiply(Color("BlueRGB")).foregroundColor(.black)
-                }
-                else{
-                    List(self.model.list)
-                    {i in
-                        NavigationLink(destination: Detail(data: i)){
-                        Text(i.name)
-                        Text(i.datetime)
-                        }
-                    }.background().colorMultiply(Color("BlueRGB")).foregroundColor(.black)
-                }
-            }.padding()
+                    }.foregroundColor(.black).background().colorMultiply(Color("BlueRGB"))
+            }
         }
     }
+    init() {
+        model.getData()
+    }
+}
+
+struct ArraysHomeView: View{
+    
+    @ObservedObject var model = ViewModel()
+    @State private var showingAlert = false
+    @State var txt = ""
+    let Probel = " "
+    
+    var body: some View{
+        ScrollView{
+            VStack(spacing:10){
+                ForEach(model.list.sorted(by: {$0.datetime > $1.datetime})) { item in
+                    VStack(alignment:.leading){
+                        Text(item.name).font(.headline)
+                        HStack{
+                            Text("Дата и время: \(item.datetime)")
+                            Spacer()
+                            if item.notes != "" {
+                                Image(systemName: "flame.fill")
+                            }
+                            Button(action: {
+                                showingAlert = true
+                            }, label: {
+                                Image(systemName: "minus.circle")
+                            }).buttonStyle(BorderedButtonStyle())
+                                .alert(isPresented: $showingAlert){
+                                Alert(
+                                title: Text("Вы действительно хотите удалить"),
+                                primaryButton: .destructive(Text("Удалить"),action:{
+                                model.deleteData(qfDelete: item)
+                            }),
+                                  secondaryButton:.cancel(Text("Отменить"),action: {
+                            }))}
+                        }
+                    }
+                }
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color("DarkBlueRGB").cornerRadius(10))
+                    .padding(.horizontal)
+            }
+        }.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
+    }
+    
+    init(){
+        model.getData()
+    }
+}
+
+struct ArrayesFilter:View{
+    @ObservedObject var model = ViewModel()
+    @State var dateStart = Date()
+    @State var dateEnd = Date()
+    @State var txt = ""
+    
+    private let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale(identifier: "ru_Ru")
+        return dateFormatter
+    }()
+    
+    
+    var body: some View{
+        ScrollView{
+            VStack(spacing: 10){
+                DatePicker("Дата начала", selection: $dateStart,displayedComponents: [.date]).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding()
+                DatePicker("Дата окончания", selection: $dateEnd,displayedComponents: [.date]).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding()
+                var txtStart = dateFormatter.string(from: dateStart)
+                var txtEnd = dateFormatter.string(from: dateEnd)
+                    
+                if dateStart != dateEnd{
+                    ForEach(self.model.list.filter{
+                        $0.datetime.lowercased() >= txtStart.lowercased() && $0.datetime.lowercased() <= txtEnd.lowercased()
+                    }){i in
+                        VStack(alignment:.leading){
+                            HStack{
+                                Text(i.name).font(.headline)
+                                Text(i.datetime).font(.headline)
+                                Spacer()
+                            }
+                        }
+                    }.foregroundColor(.white)
+                    .padding()
+                    .background(Color("DarkBlueRGB").cornerRadius(10))
+                    .padding(.horizontal)
+                }
+            }
+        }.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
+    }
+    
     init() {
         model.getData()
     }

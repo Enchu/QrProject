@@ -19,6 +19,7 @@
 		B0081E5A280007CE008BFBA4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0081E59280007CE008BFBA4 /* HomeViewController.swift */; };
 		B00A3613280551380016BD6E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00A3612280551380016BD6E /* ContentView.swift */; };
 		B02593C12800265200A4BB8A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B02593C02800265200A4BB8A /* GoogleService-Info.plist */; };
+		B07234C3282E965500868025 /* SearchHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07234C2282E965500868025 /* SearchHome.swift */; };
 		B07951D428003EFD0060E1AE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07951D328003EFD0060E1AE /* Constants.swift */; };
 		B07B3E60280FF37F0023BEBB /* VerificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07B3E5F280FF37E0023BEBB /* VerificationModel.swift */; };
 		B0874ACF28002AD8007A2C4A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B0874ACE28002AD8007A2C4A /* FirebaseAnalytics */; };
@@ -48,6 +49,7 @@
 		B0081E59280007CE008BFBA4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B00A3612280551380016BD6E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B02593C02800265200A4BB8A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B07234C2282E965500868025 /* SearchHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHome.swift; sourceTree = "<group>"; };
 		B07951D328003EFD0060E1AE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B07B3E5F280FF37E0023BEBB /* VerificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationModel.swift; sourceTree = "<group>"; };
 		B0C5454D28055853006E2464 /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				B0D1BE69280549E600922760 /* QFData.swift */,
 				B07B3E5F280FF37E0023BEBB /* VerificationModel.swift */,
 				B00A3612280551380016BD6E /* ContentView.swift */,
+				B07234C2282E965500868025 /* SearchHome.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				B0C5454E28055853006E2464 /* AdminViewController.swift in Sources */,
 				B0081E46280006FA008BFBA4 /* ViewController.swift in Sources */,
 				B00A3613280551380016BD6E /* ContentView.swift in Sources */,
+				B07234C3282E965500868025 /* SearchHome.swift in Sources */,
 				B0D1BE6A280549E600922760 /* QFData.swift in Sources */,
 				B0D1BE6C28054AC700922760 /* ViewModel.swift in Sources */,
 				B0C7E92C281C043700A7A957 /* DatePickerTextField.swift in Sources */,

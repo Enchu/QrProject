@@ -12,30 +12,34 @@ import AVFAudio
 
 
 struct ContentView: View {
+    @State private var selection = 1
     var body: some View {
-        TabView{
+        TabView(selection:$selection){
             ArraysHomeView().tabItem({
                 Image(systemName: "house")
                 Text("Главная")
-            })
-            /*HomeView().tabItem({
-                Image(systemName: "house")
-                Text("Главная")
-            })*/
+            }).tag(1)
             SearchTable().tabItem({
                 Image(systemName: "magnifyingglass")
                 Text("Поиск")
-            })
-            /*Filter().tabItem({
-                Image(systemName: "link")
-                Text("Фильтр")
-            })*/
+            }).tag(2)
             ArrayesFilter().tabItem({
                 Image(systemName: "link")
                 Text("Фильтр")
-            })
+            }).tag(3)
+            
         }.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
+        .tabViewStyle(.page)
+        .indexViewStyle(.page(backgroundDisplayMode: .always))
+        .font(.headline)
+        //.accentColor(.white)
+        
     } //End View
+    init(){
+        //UITabBar.appearance().backgroundColor = UIColor(Color("BlueRGB"))
+        //UITabBar.appearance().isTranslucent = false
+        //UITabBar.appearance().barTintColor = UIColor.blue
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -50,9 +54,7 @@ struct SearchTable:View{
     @State var txt = ""
     
     var body: some View{
-        NavigationView(){
             ScrollView{
-                //GeometryReader{_ in}.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
                 VStack (spacing: 10){
                     HStack(){
                         TextField("Поиск", text: self.$txt).textFieldStyle(RoundedBorderTextFieldStyle()).padding(.top)
@@ -85,8 +87,14 @@ struct SearchTable:View{
                                             Text(i.datetime)
                                             Spacer()
                                             if i.notes != "" {
-                                                Image(systemName: "flame.fill")
+                                                Image(systemName: "pencil")
                                             }
+                                        }
+                                        if i.notes != ""{
+                                            Text(i.notes)
+                                        }
+                                        if i.photo != ""{
+                                            Text(i.photo)
                                         }
                                     }
                                 }.foregroundColor(.white)
@@ -107,8 +115,14 @@ struct SearchTable:View{
                                         Text(i.datetime)
                                         Spacer()
                                         if i.notes != "" {
-                                            Image(systemName: "flame.fill")
+                                            Image(systemName: "pencil")
                                         }
+                                    }
+                                    if i.notes != ""{
+                                        Text(i.notes)
+                                    }
+                                    if i.photo != ""{
+                                        Text(i.photo)
                                     }
                                 }
                             }.foregroundColor(.white)
@@ -117,14 +131,10 @@ struct SearchTable:View{
                                 .padding(.horizontal)
                         }
                     }
-                    Divider()
+                    //Divider()
                 }
-            }.navigationTitle("Назад к поиску")
-                .navigationBarHidden(true)
-                .navigationViewStyle(StackNavigationViewStyle())
-                .background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
-        }
-    }
+            }.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
+    }//End View
     
     init() {
         model.getData()
@@ -246,7 +256,7 @@ struct ArraysHomeView: View{
                             Text("Дата и время: \(item.datetime)")
                             Spacer()
                             if item.notes != "" {
-                                Image(systemName: "flame.fill")
+                                Image(systemName: "pencil")
                             }
                             Button(action: {
                                 showingAlert = true
@@ -263,8 +273,7 @@ struct ArraysHomeView: View{
                             }))}
                         }
                     }
-                }
-                    .foregroundColor(.white)
+                }.foregroundColor(.white)
                     .padding()
                     .background(Color("DarkBlueRGB").cornerRadius(10))
                     .padding(.horizontal)
@@ -291,7 +300,6 @@ struct ArrayesFilter:View{
         return dateFormatter
     }()
     
-    
     var body: some View{
         ScrollView{
             VStack(spacing: 10){
@@ -307,8 +315,8 @@ struct ArrayesFilter:View{
                         $0.datetime.lowercased() >= txtStart.lowercased() && $0.datetime.lowercased() <= txtEnd.lowercased()
                     }){i in
                         VStack(alignment:.leading){
+                            Text(i.name).font(.headline).font(.headline)
                             HStack{
-                                Text(i.name).font(.headline)
                                 Text(i.datetime).font(.headline)
                                 Spacer()
                             }
@@ -350,7 +358,7 @@ struct Detail: View{
                     UIApplication.shared.open(url!)
                 }.foregroundColor(Color("DarkBlueRGB"))
             }
-            }
+            }.font(Font.custom("Apple SD Gothic Neo", size: 20))
         }
     }
 }

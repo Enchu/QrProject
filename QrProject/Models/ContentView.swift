@@ -27,13 +27,11 @@ struct ContentView: View {
                 Image(systemName: "link")
                 Text("Фильтр")
             }).tag(3)
-            
         }.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
-        .tabViewStyle(.page)
-        .indexViewStyle(.page(backgroundDisplayMode: .always))
-        .font(.headline)
+            .tabViewStyle(.page)
+            .indexViewStyle(.page(backgroundDisplayMode: .always))
+            .font(.headline)
         //.accentColor(.white)
-        
     } //End View
     init(){
         //UITabBar.appearance().backgroundColor = UIColor(Color("BlueRGB"))
@@ -79,8 +77,6 @@ struct SearchTable:View{
                                 || $0.name.lowercased().contains(self.txt.lowercased())
                             })
                             {i in
-                                NavigationLink(destination: Detail(data: i))
-                                {
                                     VStack(alignment:.leading){
                                         Text(i.name).font(.headline)
                                         HStack{
@@ -91,24 +87,26 @@ struct SearchTable:View{
                                             }
                                         }
                                         if i.notes != ""{
-                                            Text(i.notes)
+                                            Text(i.notes).font(.title2)
+                                                .fontWeight(.bold)
                                         }
                                         if i.photo != ""{
-                                            Text(i.photo)
+                                            Text(i.photo).font(Font.custom("AvenirNext-Medium",size: 12))
+                                                .onTapGesture {
+                                                    let url = URL(string: i.photo)
+                                                    UIApplication.shared.open(url!)
+                                                }
                                         }
-                                    }
-                                }.foregroundColor(.white)
-                                    .padding()
-                                    .background(Color("DarkBlueRGB").cornerRadius(10))
-                                    .padding(.horizontal)
+                                    }.foregroundColor(.white)
+                                        .padding()
+                                        .background(Color("DarkBlueRGB").cornerRadius(10))
+                                        .padding(.horizontal)
                             }
                         }
                     }
                     else{
                         ForEach(self.model.list.sorted(by: {$0.datetime > $1.datetime}))
                         {i in
-                            NavigationLink(destination: Detail(data: i))
-                            {
                                 VStack(alignment:.leading){
                                     Text(i.name).font(.headline)
                                     HStack{
@@ -119,19 +117,22 @@ struct SearchTable:View{
                                         }
                                     }
                                     if i.notes != ""{
-                                        Text(i.notes)
+                                        Text(i.notes).font(.title2)
+                                            .fontWeight(.bold)
                                     }
                                     if i.photo != ""{
-                                        Text(i.photo)
+                                        Text(i.photo).font(Font.custom("AvenirNext-Medium",size: 12))
+                                            .onTapGesture {
+                                                let url = URL(string: i.photo)
+                                                UIApplication.shared.open(url!)
+                                            }
                                     }
-                                }
-                            }.foregroundColor(.white)
-                                .padding()
-                                .background(Color("DarkBlueRGB").cornerRadius(10))
-                                .padding(.horizontal)
+                                }.foregroundColor(.white)
+                                    .padding()
+                                    .background(Color("DarkBlueRGB").cornerRadius(10))
+                                    .padding(.horizontal)
                         }
                     }
-                    //Divider()
                 }
             }.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
     }//End View
@@ -337,12 +338,6 @@ struct ArrayesFilter:View{
 
 struct Detail: View{
     var data : QFData
-    @ObservedObject var model = ViewModel()
-    @State var datetime = ""
-    @State var name = ""
-    @State var uid = ""
-    @State var notes = ""
-    @State var photo = ""
     
     var body: some View{
         ZStack(alignment: .top){

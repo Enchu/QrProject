@@ -31,7 +31,6 @@ struct ContentView: View {
             .tabViewStyle(.page)
             .indexViewStyle(.page(backgroundDisplayMode: .always))
             .font(.headline)
-        //.accentColor(.white)
     } //End View
     init(){
         //UITabBar.appearance().backgroundColor = UIColor(Color("BlueRGB"))
@@ -91,7 +90,10 @@ struct SearchTable:View{
                                                 .fontWeight(.bold)
                                         }
                                         if i.photo != ""{
-                                            Text(i.photo).font(Font.custom("AvenirNext-Medium",size: 12))
+                                            Text("Посмотреть фото")
+                                                .font(.title2)
+                                                .fontWeight(.bold)
+                                                .underline()
                                                 .onTapGesture {
                                                     let url = URL(string: i.photo)
                                                     UIApplication.shared.open(url!)
@@ -121,7 +123,10 @@ struct SearchTable:View{
                                             .fontWeight(.bold)
                                     }
                                     if i.photo != ""{
-                                        Text(i.photo).font(Font.custom("AvenirNext-Medium",size: 12))
+                                        Text("Посмотреть фото")//.font(Font.custom("AvenirNext-Medium",size: 20))
+                                            .font(.title2)
+                                            .fontWeight(.bold)
+                                            .underline()
                                             .onTapGesture {
                                                 let url = URL(string: i.photo)
                                                 UIApplication.shared.open(url!)
@@ -194,46 +199,6 @@ struct HomeView:View{
                 .navigationBarHidden(true)
                 .navigationViewStyle(StackNavigationViewStyle())
         }//.padding(.top).background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
-    }
-    init() {
-        model.getData()
-    }
-}
-
-struct Filter:View{
-    @ObservedObject var model = ViewModel()
-    @State var dateStart = Date()
-    @State var dateEnd = Date()
-    @State var txt = ""
-    
-    private let dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
-        dateFormatter.locale = Locale(identifier: "ru_Ru")
-        return dateFormatter
-    }()
-    
-    var body: some View{
-        ZStack(alignment: .top){
-            GeometryReader{_ in}.background(Color("BlueRGB").edgesIgnoringSafeArea(.all))
-            VStack(spacing: 10){
-                DatePicker("Дата начала", selection: $dateStart,displayedComponents: [.date]).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding(.top)
-                DatePicker("Дата окончания", selection: $dateEnd,displayedComponents: [.date]).environment(\.locale, Locale.init(identifier: "ru_Ru")).padding(.top)
-                    var txtStart = dateFormatter.string(from: dateStart)
-                    var txtEnd = dateFormatter.string(from: dateEnd)
-                    
-                    List(self.model.list.filter{
-                        $0.datetime.lowercased() >= txtStart.lowercased() && $0.datetime.lowercased() <= txtEnd.lowercased()
-                    })
-                    {i in
-                        NavigationLink(destination: Detail(data: i)){
-                            Text(i.name)
-                            Text(i.datetime)
-                        }
-                    }.foregroundColor(.black).background().colorMultiply(Color("BlueRGB"))
-            }
-        }
     }
     init() {
         model.getData()

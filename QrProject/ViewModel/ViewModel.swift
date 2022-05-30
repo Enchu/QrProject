@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 
+
 class ViewModel: ObservableObject{
     @Published var list:[QFData] = []
     @Published var filterList: [QFData] = []
